@@ -1,4 +1,4 @@
-name: Deploy interleaving preview
+name: Deploy test33 study site
 on:
   push:
     branches: [main]
@@ -9,46 +9,15 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/checkout@v4
-        with:
-          repository: azwsxe9564-prog/-
-          ref: main
-          path: source
-      - name: Build test site
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Prepare site
         run: |
           set -euo pipefail
-          cp source/site_index_v4.html ./preview.html
-          cp source/data/bank.json ./bank.json
-          python - <<'PY'
-          from pathlib import Path
-          p=Path('preview.html')
-          h=p.read_text(encoding='utf-8')
-          card='''<div id="modeInterleave" class="mode" onclick="setMode('interleave')"><h3>🔀 交錯學習</h3><div class="muted">跨科交替出題，避免同科連續練習。</div></div>'''
-          if 'id="modeInterleave"' not in h:
-              anchor='<div id="modeExam"'
-              i=h.find(anchor)
-              if i<0: raise SystemExit('modeExam not found')
-              end=h.find('</div>',i)
-              if end<0: raise SystemExit('modeExam end not found')
-              end+=6
-              h=h[:end]+'\n'+card+h[end:]
-          if 'function interleavePool(' not in h:
-              i=h.find('function startQuiz(')
-              if i<0: raise SystemExit('startQuiz not found')
-              fn="function interleavePool(p,n){const g={};p.forEach(q=>(g[q.subject||'其他']??=[]).push(q));const keys=Object.keys(g),out=[];keys.forEach(k=>g[k].sort(()=>Math.random()-.5));let last=null;while(out.length<Math.min(n,p.length)){let a=keys.filter(k=>g[k].length&&k!==last);if(!a.length)a=keys.filter(k=>g[k].length);const k=a[Math.floor(Math.random()*a.length)];out.push(g[k].pop());last=k}return out}\n"
-              h=h[:i]+fn+h[i:]
-          h=h.replace("function setMode(m){mode=m;$('modeFast').classList.toggle('active',m==='fast');$('modeExam').classList.toggle('active',m==='exam')}","function setMode(m){mode=m;$('modeFast').classList.toggle('active',m==='fast');$('modeExam').classList.toggle('active',m==='exam');if($('modeInterleave'))$('modeInterleave').classList.toggle('active',m==='interleave')}",1)
-          import re
-          pat=r"quiz\s*=\s*([^;]+\.slice\(0,\s*Math\.min\(n,p\.length\)\));"
-          m=re.search(pat,h)
-          if m and "interleavePool" not in m.group(0):
-              h=h[:m.start()]+"quiz=mode==='interleave'?interleavePool(p,Math.min(n,p.length)):"+m.group(1)+";"+h[m.end():]
-          p.write_text(h,encoding='utf-8')
-          PY
           mkdir -p site/data
-          mv preview.html site/index.html
-          mv bank.json site/data/bank.json
+          cp index.html site/index.html
+          cp study_engine.js site/study_engine.js
+          cp data/bank.json site/data/bank.json
           touch site/.nojekyll
       - name: Publish to gh-pages branch
         run: |
@@ -59,5 +28,5 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add .
-          git commit -m 'Deploy interleaving test site'
+          git commit -m 'Deploy test33 study site'
           git push --force https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} gh-pages
