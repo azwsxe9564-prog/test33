@@ -1,159 +1,17 @@
-/* Study engine: unique-question cycling, balanced interleaving, and resumable local state.
- * Cloud sync is intentionally handled by cloud_sync.js; this module exposes a small API
- * so the UI can connect it without coupling quiz logic to a storage provider.
- */
-(function (root) {
-  'use strict';
-
-  const VERSION = 1;
-  const STORAGE_KEY = 'sw_study_engine_v1';
-  const SUBJECT_ORDER = [
-    '社會工作研究方法',
-    '人類行為與社會環境',
-    '社會工作',
-    '社會工作直接服務',
-    '社會政策與社會立法'
-  ];
-
-  function shuffle(items, random) {
-    const out = items.slice();
-    const rng = typeof random === 'function' ? random : Math.random;
-    for (let i = out.length - 1; i > 0; i--) {
-      const j = Math.floor(rng() * (i + 1));
-      [out[i], out[j]] = [out[j], out[i]];
-    }
-    return out;
-  }
-
-  function interleaveBySubject(questions, random) {
-    const buckets = new Map();
-    SUBJECT_ORDER.forEach(subject => buckets.set(subject, []));
-    questions.forEach(q => {
-      if (!q || !q.id || !q.subject) return;
-      if (!buckets.has(q.subject)) buckets.set(q.subject, []);
-      buckets.get(q.subject).push(q);
-    });
-    buckets.forEach((items, subject) => buckets.set(subject, shuffle(items, random)));
-
-    const order = Array.from(buckets.keys());
-    const result = [];
-    let remaining = true;
-    while (remaining) {
-      remaining = false;
-      order.forEach(subject => {
-        const bucket = buckets.get(subject);
-        if (bucket.length) {
-          result.push(bucket.pop());
-          remaining = true;
-        }
-      });
-    }
-    return result;
-  }
-
-  function uniqueQuestions(questions) {
-    const seen = new Set();
-    return questions.filter(q => {
-      if (!q || q.id == null || seen.has(String(q.id))) return false;
-      seen.add(String(q.id));
-      return true;
-    });
-  }
-
-  function createState() {
-    return { version: VERSION, pools: {}, active: null, updatedAt: null };
-  }
-
-  function readState(storage) {
-    try {
-      const raw = (storage || root.localStorage).getItem(STORAGE_KEY);
-      if (!raw) return createState();
-      const parsed = JSON.parse(raw);
-      if (!parsed || parsed.version !== VERSION || !parsed.pools) return createState();
-      return parsed;
-    } catch (_) {
-      return createState();
-    }
-  }
-
-  function writeState(state, storage) {
-    state.updatedAt = new Date().toISOString();
-    try {
-      (storage || root.localStorage).setItem(STORAGE_KEY, JSON.stringify(state));
-      return true;
-    } catch (_) {
-      return false;
-    }
-  }
-
-  function poolKey(filters) {
-    const f = filters || {};
-    return JSON.stringify({ year: f.year || 'all', subject: f.subject || 'all' });
-  }
-
-  function beginCycle(questions, filters, state, random) {
-    const clean = uniqueQuestions(questions);
-    const key = poolKey(filters);
-    const prior = state.pools[key] || {};
-    const priorSeen = new Set(Array.isArray(prior.seenIds) ? prior.seenIds.map(String) : []);
-    const unseen = clean.filter(q => !priorSeen.has(String(q.id)));
-
-    // A new cycle begins only after every eligible unique question has been seen.
-    const cycle = unseen.length ? (prior.cycle || 1) : (prior.cycle || 0) + 1;
-    const source = unseen.length ? unseen : clean;
-    const queue = interleaveBySubject(source, random).map(q => String(q.id));
-    const next = {
-      cycle,
-      eligibleCount: clean.length,
-      seenIds: unseen.length ? Array.from(priorSeen) : [],
-      queue,
-      position: 0,
-      startedAt: new Date().toISOString()
-    };
-    state.pools[key] = next;
-    state.active = key;
-    return next;
-  }
-
-  function nextQuestion(questions, filters, state, random) {
-    const clean = uniqueQuestions(questions);
-    const key = poolKey(filters);
-    let pool = state.pools[key];
-    if (!pool || !Array.isArray(pool.queue) || pool.position >= pool.queue.length) {
-      pool = beginCycle(clean, filters, state, random);
-    }
-    const id = pool.queue[pool.position++];
-    pool.seenIds = Array.from(new Set((pool.seenIds || []).concat(id)));
-    const byId = new Map(clean.map(q => [String(q.id), q]));
-    return { question: byId.get(String(id)) || null, pool, state };
-  }
-
-  function resume(questions, filters, state) {
-    const key = poolKey(filters);
-    const pool = state.pools[key];
-    if (!pool || !Array.isArray(pool.queue)) return null;
-    const byId = new Map(uniqueQuestions(questions).map(q => [String(q.id), q]));
-    const id = pool.queue[pool.position];
-    return id == null ? null : (byId.get(String(id)) || null);
-  }
-
-  function snapshot(state) {
-    return JSON.parse(JSON.stringify(state));
-  }
-
-  root.SWStudyEngine = {
-    version: VERSION,
-    subjectOrder: SUBJECT_ORDER.slice(),
-    shuffle,
-    interleaveBySubject,
-    uniqueQuestions,
-    createState,
-    readState,
-    writeState,
-    poolKey,
-    beginCycle,
-    nextQuestion,
-    resume,
-    snapshot
-  };
+/* Study engine v2: persistent full-cycle queue and exact resume. */
+(function(root){'use strict';
+const VERSION=2, STORAGE_KEY='sw_study_engine_v2';
+const SUBJECT_ORDER=['社會工作研究方法','人類行為與社會環境','社會工作','社會工作直接服務','社會政策與社會立法'];
+function shuffle(items,random){const out=items.slice(),rng=typeof random==='function'?random:Math.random;for(let i=out.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[out[i],out[j]]=[out[j],out[i]];}return out;}
+function uniqueQuestions(items){const seen=new Set();return (items||[]).filter(q=>{if(!q||q.id==null||seen.has(String(q.id)))return false;seen.add(String(q.id));return true;});}
+function interleaveBySubject(items,random){const buckets=new Map();SUBJECT_ORDER.forEach(s=>buckets.set(s,[]));(items||[]).forEach(q=>{const s=q.subject||'其他';if(!buckets.has(s))buckets.set(s,[]);buckets.get(s).push(q);});buckets.forEach((a,s)=>buckets.set(s,shuffle(a,random)));const out=[];while(Array.from(buckets.values()).some(a=>a.length))for(const a of buckets.values())if(a.length)out.push(a.pop());return out;}
+function createState(){return {version:VERSION,pools:{},active:null,updatedAt:null};}
+function readState(storage){try{const raw=(storage||root.localStorage).getItem(STORAGE_KEY);if(!raw)return createState();const x=JSON.parse(raw);return x&&x.version===VERSION&&x.pools?x:createState();}catch(_){return createState();}}
+function writeState(state,storage){state.updatedAt=new Date().toISOString();try{(storage||root.localStorage).setItem(STORAGE_KEY,JSON.stringify(state));return true;}catch(_){return false;}}
+function poolKey(f){f=f||{};return JSON.stringify({year:f.year||'all',subject:f.subject||'all'});}
+function beginCycle(items,filters,state,random){const clean=uniqueQuestions(items),key=poolKey(filters),prior=state.pools[key]||{};const queue=interleaveBySubject(clean,random).map(q=>String(q.id));if(queue.length>1&&queue[0]===prior.lastId){const j=queue.findIndex(id=>id!==prior.lastId);if(j>0)[queue[0],queue[j]]=[queue[j],queue[0]];}const pool={cycle:(prior.cycle||0)+1,eligibleCount:clean.length,queue,position:0,currentId:null,seenIds:[],lastId:prior.lastId||null,startedAt:new Date().toISOString()};state.pools[key]=pool;state.active=key;return pool;}
+function nextQuestion(items,filters,state,random){const clean=uniqueQuestions(items),key=poolKey(filters);let pool=state.pools[key];if(!pool||!Array.isArray(pool.queue)||pool.queue.length!==clean.length||pool.position>=pool.queue.length)pool=beginCycle(clean,filters,state,random);if(pool.currentId!=null){pool.lastId=pool.currentId;if(!pool.seenIds.includes(pool.currentId))pool.seenIds.push(pool.currentId);pool.position++;pool.currentId=null;}if(pool.position>=pool.queue.length)pool=beginCycle(clean,filters,state,random);pool.currentId=pool.queue[pool.position];const byId=new Map(clean.map(q=>[String(q.id),q]));return {question:byId.get(String(pool.currentId))||null,pool,state};}
+function resume(items,filters,state){const pool=state.pools[poolKey(filters)];if(!pool||!Array.isArray(pool.queue))return null;const id=pool.currentId!=null?pool.currentId:pool.queue[pool.position];if(id==null)return null;return uniqueQuestions(items).find(q=>String(q.id)===String(id))||null;}
+function snapshot(state){return JSON.parse(JSON.stringify(state));}
+root.SWStudyEngine={version:VERSION,subjectOrder:SUBJECT_ORDER.slice(),shuffle,interleaveBySubject,uniqueQuestions,createState,readState,writeState,poolKey,beginCycle,nextQuestion,resume,snapshot};
 })(window);
