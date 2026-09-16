@@ -17,7 +17,7 @@ jobs:
           mkdir -p site/data
           cp index.html site/index.html
           cp study_engine.js site/study_engine.js
-          cp data/bank.json site/data/bank.json
+          cp bank.json site/data/bank.json
           touch site/.nojekyll
       - name: Publish to gh-pages branch
         run: |
