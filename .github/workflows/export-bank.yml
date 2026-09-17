@@ -20,54 +20,59 @@ jobs:
 
       - name: Split bank by year and subject
         run: |
+          set -euo pipefail
           python3 - <<'PY'
           import json, os, re
           from collections import defaultdict
 
-          with open('bank.json', 'r', encoding='utf-8') as f:
+          with open('bank.json', encoding='utf-8') as f:
               bank = json.load(f)
-          questions = bank.get('questions', []) if isinstance(bank, dict) else bank
-          if not isinstance(questions, list):
-              raise SystemExit('Expected bank.json to contain a questions array')
+          if not isinstance(bank, dict) or not isinstance(bank.get('questions'), list):
+              raise SystemExit('Invalid bank.json: expected an object with a questions array')
+          questions = bank['questions']
+          if not questions:
+              raise SystemExit('Invalid bank.json: questions array is empty')
 
-          os.makedirs('export', exist_ok=True)
-          # Keep a complete copy as a fallback, plus smaller slices where metadata is present.
-          with open('export/bank-full.json', 'w', encoding='utf-8') as f:
+          out = 'export'
+          os.makedirs(out, exist_ok=True)
+          with open(f'{out}/bank-full.json', 'w', encoding='utf-8') as f:
               json.dump(bank, f, ensure_ascii=False, separators=(',', ':'))
 
-          def get_value(item, names):
-              for name in names:
-                  value = item.get(name)
-                  if value is not None and value != '':
-                      return value
-              return None
+          def safe(value):
+              return re.sub(r'[^0-9A-Za-z_-]+', '_', str(value)).strip('_') or 'unknown'
 
           groups = defaultdict(list)
+          missing = 0
           for q in questions:
               if not isinstance(q, dict):
+                  missing += 1
                   continue
-              year = get_value(q, ('year', 'exam_year', '年度'))
-              subject = get_value(q, ('subject', '科目', 'exam_subject'))
-              if year is None or subject is None:
+              year, subject = q.get('year'), q.get('subject')
+              if year in (None, '') or subject in (None, ''):
+                  missing += 1
                   continue
-              safe_year = re.sub(r'[^0-9A-Za-z_-]+', '_', str(year))
-              safe_subject = re.sub(r'[^0-9A-Za-z_-]+', '_', str(subject)).strip('_') or 'subject'
-              groups[(safe_year, safe_subject)].append(q)
+              session = q.get('session', '未標示')
+              groups[(safe(year), safe(session), safe(subject))].append(q)
 
-          for (year, subject), rows in groups.items():
-              path = f'export/{year}/{subject}.json'
-              os.makedirs(os.path.dirname(path), exist_ok=True)
-              with open(path, 'w', encoding='utf-8') as f:
-                  json.dump({'year': year, 'subject': subject, 'questions': rows}, f,
-                            ensure_ascii=False, separators=(',', ':'))
+          if not groups:
+              raise SystemExit('No year/subject groups found; refusing to publish empty split output')
 
-          with open('export/README.txt', 'w', encoding='utf-8') as f:
-              f.write(f'Total questions: {len(questions)}\\n')
-              f.write(f'Year/subject slices created: {len(groups)}\\n')
-              f.write('bank-full.json is the complete source copy.\\n')
-              if not groups:
-                  f.write('No year/subject slices were detected. Check question metadata keys.\\n')
-          print(f'Exported {len(questions)} questions into {len(groups)} year/subject slices.')
+          for (year, session, subject), rows in sorted(groups.items()):
+              directory = f'{out}/{year}/{session}'
+              os.makedirs(directory, exist_ok=True)
+              with open(f'{directory}/{subject}.json', 'w', encoding='utf-8') as f:
+                  json.dump({'year': year, 'session': session, 'subject': subject,
+                             'questions': rows}, f, ensure_ascii=False, separators=(',', ':'))
+
+          with open(f'{out}/README.txt', 'w', encoding='utf-8') as f:
+              f.write(f'Total questions: {len(questions)}\n')
+              f.write(f'Questions included in year/session/subject files: {sum(map(len, groups.values()))}\n')
+              f.write(f'Groups created: {len(groups)}\n')
+              f.write(f'Rows without usable year/subject metadata: {missing}\n')
+              f.write('bank-full.json contains the complete original bank object.\n')
+          print(f'Exported {len(questions)} total questions; {sum(map(len, groups.values()))} grouped; {len(groups)} files.')
+          if missing:
+              print(f'WARNING: {missing} rows were not included in grouped files; they remain in bank-full.json.')
           PY
 
       - name: Upload question bank artifact
