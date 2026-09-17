@@ -1,0 +1,79 @@
+name: Export question bank
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'bank.json'
+      - '.github/workflows/export-bank.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Split bank by year and subject
+        run: |
+          python3 - <<'PY'
+          import json, os, re
+          from collections import defaultdict
+
+          with open('bank.json', 'r', encoding='utf-8') as f:
+              bank = json.load(f)
+          questions = bank.get('questions', []) if isinstance(bank, dict) else bank
+          if not isinstance(questions, list):
+              raise SystemExit('Expected bank.json to contain a questions array')
+
+          os.makedirs('export', exist_ok=True)
+          # Keep a complete copy as a fallback, plus smaller slices where metadata is present.
+          with open('export/bank-full.json', 'w', encoding='utf-8') as f:
+              json.dump(bank, f, ensure_ascii=False, separators=(',', ':'))
+
+          def get_value(item, names):
+              for name in names:
+                  value = item.get(name)
+                  if value is not None and value != '':
+                      return value
+              return None
+
+          groups = defaultdict(list)
+          for q in questions:
+              if not isinstance(q, dict):
+                  continue
+              year = get_value(q, ('year', 'exam_year', '年度'))
+              subject = get_value(q, ('subject', '科目', 'exam_subject'))
+              if year is None or subject is None:
+                  continue
+              safe_year = re.sub(r'[^0-9A-Za-z_-]+', '_', str(year))
+              safe_subject = re.sub(r'[^0-9A-Za-z_-]+', '_', str(subject)).strip('_') or 'subject'
+              groups[(safe_year, safe_subject)].append(q)
+
+          for (year, subject), rows in groups.items():
+              path = f'export/{year}/{subject}.json'
+              os.makedirs(os.path.dirname(path), exist_ok=True)
+              with open(path, 'w', encoding='utf-8') as f:
+                  json.dump({'year': year, 'subject': subject, 'questions': rows}, f,
+                            ensure_ascii=False, separators=(',', ':'))
+
+          with open('export/README.txt', 'w', encoding='utf-8') as f:
+              f.write(f'Total questions: {len(questions)}\\n')
+              f.write(f'Year/subject slices created: {len(groups)}\\n')
+              f.write('bank-full.json is the complete source copy.\\n')
+              if not groups:
+                  f.write('No year/subject slices were detected. Check question metadata keys.\\n')
+          print(f'Exported {len(questions)} questions into {len(groups)} year/subject slices.')
+          PY
+
+      - name: Upload question bank artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: question-bank-export
+          path: export/
+          if-no-files-found: error
+          retention-days: 30
