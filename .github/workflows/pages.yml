@@ -18,6 +18,7 @@ jobs:
           cp index.html site/index.html
           cp study_engine.js site/study_engine.js
           cp bank.json site/data/bank.json
+          cp review-notes-demo.html site/review-notes-demo.html
           touch site/.nojekyll
       - name: Publish to gh-pages branch
         run: |
