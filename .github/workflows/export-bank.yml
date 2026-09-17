@@ -22,7 +22,7 @@ jobs:
         run: |
           set -euo pipefail
           python3 - <<'PY'
-          import json, os, re
+          import json, os
           from collections import defaultdict
 
           with open('bank.json', encoding='utf-8') as f:
@@ -39,7 +39,9 @@ jobs:
               json.dump(bank, f, ensure_ascii=False, separators=(',', ':'))
 
           def safe(value):
-              return re.sub(r'[^0-9A-Za-z_-]+', '_', str(value)).strip('_') or 'unknown'
+              # Preserve Chinese and other Unicode letters; only replace path separators and unsafe punctuation.
+              text = ''.join(ch if (ch.isalnum() or ch in '_-') else '_' for ch in str(value))
+              return text.strip('_') or 'unknown'
 
           groups = defaultdict(list)
           missing = 0
