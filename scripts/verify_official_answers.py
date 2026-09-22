@@ -11,7 +11,7 @@ PAPERS=[
 ("113-1","113030","103","030"),("113-2","113100","103","030"),
 ("114-1","114030","103","030"),("114-2","114100","103","030"),
 ("115-1","115030","103","030"),("115-2","115100","103","030")]
-SUBJECTS=[("社會工作","110"),("社會工作直接服務","210"),("社會政策與社會立法","310"),("人類行為與社會環境","410"),("社會工作研究方法","510")]
+SUBJECTS=[("社會工作",1),("社會工作直接服務",2),("社會政策與社會立法",4),("人類行為與社會環境",5),("社會工作研究方法",6)]
 S=requests.Session(); S.headers["User-Agent"]="Mozilla/5.0 official-answer-verifier"
 
 def parse(html,subject):
@@ -39,8 +39,7 @@ def main():
     report={"checked_at":__import__("datetime").datetime.now(__import__("datetime").timezone.utc).isoformat(),"source":"考選部「測驗式試題標準答案」","papers":[],"mismatches":[],"parse_errors":[]}
     for paper,code,c,sbase in PAPERS:
         p={"paper":paper,"code":code,"subjects":[]}
-        for subject,scode in SUBJECTS:
-            idx=int(scode)//100
+        for subject,idx in SUBJECTS:
             s=f"{sbase}{idx}"
             url=f"https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c={c}&code={code}&q=1&s={s}&t=S"
             try:
