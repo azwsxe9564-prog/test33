@@ -92,5 +92,5 @@ def main():
     print(json.dumps(report['totals'],ensure_ascii=False))
     for x in report['mismatches'][:200]: print('MISMATCH',json.dumps(x,ensure_ascii=False))
     for x in report['unresolved'][:100]: print('UNRESOLVED',json.dumps(x,ensure_ascii=False))
-    if report['parse_errors'] or report['unresolved'] or report['mismatches']: sys.exit(1)
+    if report['totals']['parse_errors'] or report['unresolved'] or report['mismatches']: sys.exit(1)
 if __name__=='__main__': main()
