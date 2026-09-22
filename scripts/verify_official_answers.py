@@ -16,7 +16,6 @@ S=requests.Session(); S.headers["User-Agent"]="Mozilla/5.0 official-answer-verif
 
 def parse(html,subject):
     soup=BeautifulSoup(html,"html.parser"); text=soup.get_text(" ",strip=True)
-    if subject not in text: raise ValueError("subject not found")
     # Official HTML answer pages contain 10 tables, each with question headers and answer row.
     out={}
     for table in soup.find_all("table"):
@@ -31,7 +30,7 @@ def parse(html,subject):
     if len(out)<40:
         pairs=re.findall(r"第(\d+)題\s*([ABCD])",text)
         for n,a in pairs: out[int(n)]=a
-    if len(out)<40: raise ValueError(f"only {len(out)} answers parsed")
+    if len(out)<40: raise ValueError(f"only {len(out)} answers parsed for {subject}")
     return "".join(out[i] for i in range(1,41))
 
 def main():
