@@ -17,10 +17,10 @@
       "人類行為與社會環境",
       "社會工作研究方法"
     ],
-    "papers_selected": 56,
-    "papers_ok": 56,
+    "papers_selected": 60,
+    "papers_ok": 60,
     "papers_failed": 0,
-    "items": 2396,
+    "items": 2400,
     "failures": [],
     "parser_version": "socialworkerdaily-2.0",
     "full_credit_definition": "accepted_answers = A/B/C/D, based on official answer notes such as 一律給分",
@@ -51224,17 +51224,18 @@
         "生態系統觀點",
         "行為學派"
       ],
-      "answer": 0,
-      "explanation": "(A)正確，重點在於「源自於兒時原生家庭嚴厲管教」、「近日工作被罵」，而心理暨社會學派較強調心理因素與社會環境交互作用，此選項較為合適 (B)錯誤，本題並沒有提到任何優點或特長的優勢 (C)錯誤，本題重點在於社會環境(工作不順)和心理因素(原生家庭嚴厲管教)所導致的 (D)錯誤，本題重點在於社會環境(工作不順)和心理因素(原生家庭嚴厲管教)所導致的",
+      "answer": 1,
+      "explanation": "【答案校正】考選部115年第一次專門職業及技術人員高等考試「社會工作」標準答案為B。",
       "source": "https://socialworkerdaily.com/115-1-socialwork/",
-      "answer_source": "https://socialworkerdaily.com/115-1-socialwork/",
+      "answer_source": "考選部官方標準答案（115年第一次）",
       "source_name": "社工日常 socialworkerdaily",
-      "corrected": false,
+      "corrected": true,
       "accepted_answers": [
-        0
+        1
       ],
       "is_full_credit": false,
-      "answer_type": "單一答案"
+      "answer_type": "單一答案",
+      "explanation_source": "考選部官方標準答案校正"
     },
     {
       "id": "115-1-社會工作-13",
@@ -51249,17 +51250,18 @@
         "改變你的想法會好過些",
         "要找正向信念，運作與擴大"
       ],
-      "answer": 1,
-      "explanation": "(A)正確，認知行為學派強調證據為基礎，透過實證研究支持其介入方法 (B)錯誤，潛意識是精神分析學派的內容 (C)正確，認知行為學派強調修正「錯誤認知」，可以改善情緒和行為 (D)正確，認知行為學派會協助服務對象建立正向信念，並練習應用於生活之中",
+      "answer": 2,
+      "explanation": "【答案校正】考選部115年第一次專門職業及技術人員高等考試「社會工作」標準答案為C。",
       "source": "https://socialworkerdaily.com/115-1-socialwork/",
-      "answer_source": "https://socialworkerdaily.com/115-1-socialwork/",
+      "answer_source": "考選部官方標準答案（115年第一次）",
       "source_name": "社工日常 socialworkerdaily",
-      "corrected": false,
+      "corrected": true,
       "accepted_answers": [
-        1
+        2
       ],
       "is_full_credit": false,
-      "answer_type": "單一答案"
+      "answer_type": "單一答案",
+      "explanation_source": "考選部官方標準答案校正"
     },
     {
       "id": "115-1-社會工作-14",
@@ -51299,17 +51301,18 @@
         "社會工作者要扮演專家的角色，避免與服務對象建立平等夥伴關係",
         "服務的面向不針對團體或社區進行介入"
       ],
-      "answer": 1,
-      "explanation": "(A)錯誤，生活模式強調「人與環境」的互動，不僅提升服務對象的能力，也會去改變環境的阻礙或社會的不公義 (B)正確，生活模式強調透過賦權讓服務對象在和環境互動中，重新獲得掌控感，增加對自我生活的決定權 (C)錯誤，生活模式強調的是工作者和服務對象之間的合作關係，是夥伴的關係而非權威的專家 (D)錯誤，個人、家庭、團體、社區都是環境的一環，因此介入服務的層面也包含了團體及社區",
+      "answer": 2,
+      "explanation": "【答案校正】考選部115年第一次專門職業及技術人員高等考試「社會工作」標準答案為C。",
       "source": "https://socialworkerdaily.com/115-1-socialwork/",
-      "answer_source": "https://socialworkerdaily.com/115-1-socialwork/",
+      "answer_source": "考選部官方標準答案（115年第一次）",
       "source_name": "社工日常 socialworkerdaily",
-      "corrected": false,
+      "corrected": true,
       "accepted_answers": [
-        1
+        2
       ],
       "is_full_credit": false,
-      "answer_type": "單一答案"
+      "answer_type": "單一答案",
+      "explanation_source": "考選部官方標準答案校正"
     },
     {
       "id": "115-1-社會工作-16",
@@ -51324,17 +51327,18 @@
         "協助服務對象發展對問題的公共與政治的意識",
         "增權觀點處遇策略的思考重點為時間因素"
       ],
-      "answer": 3,
-      "explanation": "(A)正確，增權重視服務對象的主觀經驗與對問題的詮釋，為處遇策略之一 (B)正確，這是核心，透過教育和訓練來提升服務對象的能力，為處遇策略之一 (C)正確，增權的起源和少數民族有關，打破權力的壓迫，讓弱勢的族群，能夠擁有更多的力量，去選擇自己要的生活面對困境，因此發展公共政治意識屬於其中一種處遇策略 (D)錯誤，時間因素並非增權的思考重點，以時間因素為重點的通常是任務中心模式或危機介入模式",
+      "answer": 0,
+      "explanation": "【答案校正】考選部115年第一次專門職業及技術人員高等考試「社會工作」標準答案為A。",
       "source": "https://socialworkerdaily.com/115-1-socialwork/",
-      "answer_source": "https://socialworkerdaily.com/115-1-socialwork/",
+      "answer_source": "考選部官方標準答案（115年第一次）",
       "source_name": "社工日常 socialworkerdaily",
-      "corrected": false,
+      "corrected": true,
       "accepted_answers": [
-        3
+        0
       ],
       "is_full_credit": false,
-      "answer_type": "單一答案"
+      "answer_type": "單一答案",
+      "explanation_source": "考選部官方標準答案校正"
     },
     {
       "id": "115-1-社會工作-17",
@@ -51349,17 +51353,18 @@
         "正視被害人負起該事件的自我責任",
         "提升民眾對數位性暴力的感知、倡議數位公民素養教育"
       ],
-      "answer": 2,
-      "explanation": "(A)正確，女性主義強調增權，協助被害人從受創經驗中找回生活的掌控感與自主性，減少無力感 (B)正確，女性主義會從結構層面詮釋問題根源，解析數位性暴力如何產生於不對等的性別權力結構中，幫助其去標籤化 (C)錯誤，女性主義認為性暴力是源自於社會性別權力不對等和父權體制，反對將責任歸因於被害人，並致力於打破受害者自責與社會責難 (D)正確，女性主義重視社會行動和倡議，改善制度和文化中的性別不平等",
+      "answer": 0,
+      "explanation": "【答案校正】考選部115年第一次專門職業及技術人員高等考試「社會工作」標準答案為A。",
       "source": "https://socialworkerdaily.com/115-1-socialwork/",
-      "answer_source": "https://socialworkerdaily.com/115-1-socialwork/",
+      "answer_source": "考選部官方標準答案（115年第一次）",
       "source_name": "社工日常 socialworkerdaily",
-      "corrected": false,
+      "corrected": true,
       "accepted_answers": [
-        2
+        0
       ],
       "is_full_credit": false,
-      "answer_type": "單一答案"
+      "answer_type": "單一答案",
+      "explanation_source": "考選部官方標準答案校正"
     },
     {
       "id": "115-1-社會工作-18",
@@ -51374,17 +51379,18 @@
         "社會工作者建議服務對象運用保護令為武器，以嚇阻其伴侶",
         "社會工作者在服務過程中重視性別平等、與夥伴工作關係"
       ],
-      "answer": 2,
-      "explanation": "(A)正確，女性主義強調照顧工作也有極大的貢獻和價值，肯定其社會與經濟貢獻 (B)正確，女性主義致力挑戰與破除傳統性別角色刻板印象，促進個人多元發展與性別解放 (C)錯誤，雖然支持被害者使用保護令來保護自己，但不代表可以將保護令視為攻擊性的武器 (D)正確，促進性別平等為核心價值",
+      "answer": 3,
+      "explanation": "【答案校正】考選部115年第一次專門職業及技術人員高等考試「社會工作」標準答案為D。",
       "source": "https://socialworkerdaily.com/115-1-socialwork/",
-      "answer_source": "https://socialworkerdaily.com/115-1-socialwork/",
+      "answer_source": "考選部官方標準答案（115年第一次）",
       "source_name": "社工日常 socialworkerdaily",
-      "corrected": false,
+      "corrected": true,
       "accepted_answers": [
-        2
+        3
       ],
       "is_full_credit": false,
-      "answer_type": "單一答案"
+      "answer_type": "單一答案",
+      "explanation_source": "考選部官方標準答案校正"
     },
     {
       "id": "115-1-社會工作-19",
@@ -51424,17 +51430,18 @@
         "生態觀點",
         "基變觀點"
       ],
-      "answer": 2,
-      "explanation": "(A)錯誤，復原力關注個體遭遇困境時的因應能力，雖然是優勢觀點的一環，但和題目的「外展是較佳的處遇方式」較為無關 (B)錯誤，增權強調提升服務對象的決定能力和對資源的掌控能力，和題目的「外展是較佳的處遇方式」較為無關 (C)正確，生態觀點強調服務對象和環境互動，而外展工作讓社工踏入服務對象的生活環境，去了解其所在的環境，並觀察服務對象和環境的互動，故以此題目來說，此選項比較符合 (D)錯誤，基變觀點較關注社會結構性的壓迫和改革，和本題的外展較為無關",
+      "answer": 3,
+      "explanation": "【答案校正】考選部115年第一次專門職業及技術人員高等考試「社會工作」標準答案為D。",
       "source": "https://socialworkerdaily.com/115-1-socialwork/",
-      "answer_source": "https://socialworkerdaily.com/115-1-socialwork/",
+      "answer_source": "考選部官方標準答案（115年第一次）",
       "source_name": "社工日常 socialworkerdaily",
-      "corrected": false,
+      "corrected": true,
       "accepted_answers": [
-        2
+        3
       ],
       "is_full_credit": false,
-      "answer_type": "單一答案"
+      "answer_type": "單一答案",
+      "explanation_source": "考選部官方標準答案校正"
     },
     {
       "id": "115-1-社會工作-21",
@@ -51449,17 +51456,18 @@
         "社會工作方法",
         "社會工作角色"
       ],
-      "answer": 0,
-      "explanation": "(A)正確，這是「專業認同的根基」，哲學包含了核心價值，像是社會正義、尊嚴、平等，而這些信念定義了「何為社會工作?」、「為何要這樣做?」，是區分社會工作和其他助人工作的本質 (B)錯誤，功能是專業表現出來的作用，而非專業認同的基礎 (C)錯誤，方法是達到目標的手段和工具，會隨著時代和技術演進而改變，不會是專業認同的基礎 (D)錯誤，角色是工作者在不同情境下所展現的行為表現，也非專業認同的基礎",
+      "answer": 2,
+      "explanation": "【答案校正】考選部115年第一次專門職業及技術人員高等考試「社會工作」標準答案為C。",
       "source": "https://socialworkerdaily.com/115-1-socialwork/",
-      "answer_source": "https://socialworkerdaily.com/115-1-socialwork/",
+      "answer_source": "考選部官方標準答案（115年第一次）",
       "source_name": "社工日常 socialworkerdaily",
-      "corrected": false,
+      "corrected": true,
       "accepted_answers": [
-        0
+        2
       ],
       "is_full_credit": false,
-      "answer_type": "單一答案"
+      "answer_type": "單一答案",
+      "explanation_source": "考選部官方標準答案校正"
     },
     {
       "id": "115-1-社會工作-22",
@@ -51524,17 +51532,18 @@
         "保密是案主的基本權利",
         "保密是絕對性義務"
       ],
-      "answer": 3,
-      "explanation": "(A)正確，服務對象不用擔心資料外流，才能坦誠相告，因此保密是信任的基礎 (B)正確，只有在安全信任的狀況下，工作者才能蒐集到完整的資訊，才能進行評估和處遇 (C)正確，保密涉及對服務對象的隱私和尊重 (D)錯誤，保密是相對的義務，當有自傷、傷人或涉及法定通報義務時，需要打破保密原則",
+      "answer": 1,
+      "explanation": "【答案校正】考選部115年第一次專門職業及技術人員高等考試「社會工作」標準答案為B。",
       "source": "https://socialworkerdaily.com/115-1-socialwork/",
-      "answer_source": "https://socialworkerdaily.com/115-1-socialwork/",
+      "answer_source": "考選部官方標準答案（115年第一次）",
       "source_name": "社工日常 socialworkerdaily",
-      "corrected": false,
+      "corrected": true,
       "accepted_answers": [
-        3
+        1
       ],
       "is_full_credit": false,
-      "answer_type": "單一答案"
+      "answer_type": "單一答案",
+      "explanation_source": "考選部官方標準答案校正"
     },
     {
       "id": "115-1-社會工作-25",
@@ -51549,17 +51558,18 @@
         "人們願意追求並實踐",
         "必須符應人的內在慾望"
       ],
-      "answer": 3,
-      "explanation": "(A)正確，倫理上的「善」通常包含對社會整體利益的貢獻，符合社會共同認可的價值觀 (B)正確，在許多的文化之中，倫理中的善深受風俗習慣的影響，因此會符合風俗習慣 (C)正確，善在倫理中，被定義為值得追尋的目標 (D)錯誤，內在慾望可能是自私且有害的，所以和倫理中的善不相同",
+      "answer": 1,
+      "explanation": "【答案校正】考選部115年第一次專門職業及技術人員高等考試「社會工作」標準答案為B。",
       "source": "https://socialworkerdaily.com/115-1-socialwork/",
-      "answer_source": "https://socialworkerdaily.com/115-1-socialwork/",
+      "answer_source": "考選部官方標準答案（115年第一次）",
       "source_name": "社工日常 socialworkerdaily",
-      "corrected": false,
+      "corrected": true,
       "accepted_answers": [
-        3
+        1
       ],
       "is_full_credit": false,
-      "answer_type": "單一答案"
+      "answer_type": "單一答案",
+      "explanation_source": "考選部官方標準答案校正"
     },
     {
       "id": "115-1-社會工作-26",
@@ -51624,17 +51634,18 @@
         "調解",
         "審議裁決"
       ],
-      "answer": 1,
-      "explanation": "(A)正確，接案受理違反倫理守則的投訴 (B)錯誤，診斷通常用在問或疾病本身，在過往診斷學派中有使用過診斷一詞，但現今的社會工作專業中，已經較為不使用了 (C)正確，透過公正第三方的幫忙，讓雙方達成和解或解決爭議 (D)正確，若調解失敗，則進入正式的聽證、裁決等程序，以判斷是否違規",
+      "answer": 2,
+      "explanation": "【答案校正】考選部115年第一次專門職業及技術人員高等考試「社會工作」標準答案為C。",
       "source": "https://socialworkerdaily.com/115-1-socialwork/",
-      "answer_source": "https://socialworkerdaily.com/115-1-socialwork/",
+      "answer_source": "考選部官方標準答案（115年第一次）",
       "source_name": "社工日常 socialworkerdaily",
-      "corrected": false,
+      "corrected": true,
       "accepted_answers": [
-        1
+        2
       ],
       "is_full_credit": false,
-      "answer_type": "單一答案"
+      "answer_type": "單一答案",
+      "explanation_source": "考選部官方標準答案校正"
     },
     {
       "id": "115-1-社會工作-29",
@@ -51674,17 +51685,18 @@
         "性別主義",
         "年齡主義"
       ],
-      "answer": 1,
-      "explanation": "(A)錯誤，種族主義是基於種族、民族差異而產生的，和題目敘述的經濟階級無關 (B)正確，菁英主義強調社會不平等是必然的，而且優勢階級的菁英優於平民老百姓，因此會對低經濟階級存有偏見和歧視，符合題目敘述 (C)錯誤，性別主義是基於性別差異而產生的，和題目敘述的經濟階級無關 (D)錯誤，年齡主義是基於年齡差異而產生的，和題目敘述的經濟階級無關",
+      "answer": 2,
+      "explanation": "【答案校正】考選部115年第一次專門職業及技術人員高等考試「社會工作」標準答案為C。",
       "source": "https://socialworkerdaily.com/115-1-socialwork/",
-      "answer_source": "https://socialworkerdaily.com/115-1-socialwork/",
+      "answer_source": "考選部官方標準答案（115年第一次）",
       "source_name": "社工日常 socialworkerdaily",
-      "corrected": false,
+      "corrected": true,
       "accepted_answers": [
-        1
+        2
       ],
       "is_full_credit": false,
-      "answer_type": "單一答案"
+      "answer_type": "單一答案",
+      "explanation_source": "考選部官方標準答案校正"
     },
     {
       "id": "115-1-社會工作-31",
@@ -51724,17 +51736,18 @@
         "失智症是正常的老化症狀之一，失智症者皆會伴隨失能問題，無法自理生活，難以融入家庭或社區",
         "懷舊治療屬非藥物治療，可以改善失智症者的精神行為症狀"
       ],
-      "answer": 2,
-      "explanation": "(A)正確，這是失智症的醫學定義 (B)正確，失智症是一個退化性的連續過程，雖然會用CDR臨床失智評估量表來分輕、中、重度，但很難做出絕對的區分 (C)錯誤，失智症是種疾病，而正常老化是健忘，健忘是經過提醒後可以想起，但失智是會完全不記得有過。而且失智症不一定會完全無法自理生活 (D)正確，懷舊治療是透過回憶過往物品或經歷，提升個案自尊，改善狀況",
+      "answer": 0,
+      "explanation": "【答案校正】考選部115年第一次專門職業及技術人員高等考試「社會工作」標準答案為A。",
       "source": "https://socialworkerdaily.com/115-1-socialwork/",
-      "answer_source": "https://socialworkerdaily.com/115-1-socialwork/",
+      "answer_source": "考選部官方標準答案（115年第一次）",
       "source_name": "社工日常 socialworkerdaily",
-      "corrected": false,
+      "corrected": true,
       "accepted_answers": [
-        2
+        0
       ],
       "is_full_credit": false,
-      "answer_type": "單一答案"
+      "answer_type": "單一答案",
+      "explanation_source": "考選部官方標準答案校正"
     },
     {
       "id": "115-1-社會工作-33",
@@ -51749,17 +51762,18 @@
         "親密關係暴力受暴者以女性居多",
         "「經濟暴力」算是親密關係暴力的一種類型"
       ],
-      "answer": 0,
-      "explanation": "(A)錯誤，現在根據家暴法，即便沒有同居，只要年滿16歲，遭受伴侶不法侵害時，被害人仍可聲請保護令 (B)正確，約會強暴屬於侵犯性自主權，屬於親密關係暴力的一環 (C)正確，以統計上來說，目前受害者以女性占多數 (D)正確，根據家暴法的定義，身體、精神、經濟上的不法侵害行為都屬於親密關係暴力的一種類型",
+      "answer": 1,
+      "explanation": "【答案校正】考選部115年第一次專門職業及技術人員高等考試「社會工作」標準答案為B。",
       "source": "https://socialworkerdaily.com/115-1-socialwork/",
-      "answer_source": "https://socialworkerdaily.com/115-1-socialwork/",
+      "answer_source": "考選部官方標準答案（115年第一次）",
       "source_name": "社工日常 socialworkerdaily",
-      "corrected": false,
+      "corrected": true,
       "accepted_answers": [
-        0
+        1
       ],
       "is_full_credit": false,
-      "answer_type": "單一答案"
+      "answer_type": "單一答案",
+      "explanation_source": "考選部官方標準答案校正"
     },
     {
       "id": "115-1-社會工作-34",
@@ -51774,17 +51788,18 @@
         "避免二次傷害",
         "強調優勢觀點"
       ],
-      "answer": 0,
-      "explanation": "(A)錯誤，降低衝突氣氛並非創傷知情照顧的重要原則 (B)正確，符合原則中的「賦權」，也就是支持他們的想法和決定，讓他們擁有自主權 (C)正確，符合原則中的「安全」，避免二度傷害是創傷知情照顧的關鍵概念，服務過程中要確保這些行為不會讓服務對象再次經歷創傷 (D)正確，符合原則中的「賦權」，著重服務對象的優勢，提升復原力，從創傷中復原",
+      "answer": 3,
+      "explanation": "【答案校正】考選部115年第一次專門職業及技術人員高等考試「社會工作」標準答案為D。",
       "source": "https://socialworkerdaily.com/115-1-socialwork/",
-      "answer_source": "https://socialworkerdaily.com/115-1-socialwork/",
+      "answer_source": "考選部官方標準答案（115年第一次）",
       "source_name": "社工日常 socialworkerdaily",
-      "corrected": false,
+      "corrected": true,
       "accepted_answers": [
-        0
+        3
       ],
       "is_full_credit": false,
-      "answer_type": "單一答案"
+      "answer_type": "單一答案",
+      "explanation_source": "考選部官方標準答案校正"
     },
     {
       "id": "115-1-社會工作-35",
@@ -51799,17 +51814,18 @@
         "把握配合度高的青少年，給予生活指導機會",
         "不急著取得處置進展，重視事後引導"
       ],
-      "answer": 2,
-      "explanation": "(A)正確，工作者感同身受以後，有助於發展夥伴關係 (B)正確，工作者不以主流文化來介入，而是透過和青少年的文化交流，了解青少年的次文化，有助於發展夥伴關係 (C)錯誤，題目要問的是「夥伴關係」，而本選項的「指導」和其精神不符合 (D)正確，以建立關係來說，不急於達成目標有助於建立長期的信任關係，過於著急達成目標反而會破壞雙方關係，符合題目的發展夥伴關係",
+      "answer": 3,
+      "explanation": "【答案校正】考選部115年第一次專門職業及技術人員高等考試「社會工作」標準答案為D。",
       "source": "https://socialworkerdaily.com/115-1-socialwork/",
-      "answer_source": "https://socialworkerdaily.com/115-1-socialwork/",
+      "answer_source": "考選部官方標準答案（115年第一次）",
       "source_name": "社工日常 socialworkerdaily",
-      "corrected": false,
+      "corrected": true,
       "accepted_answers": [
-        2
+        3
       ],
       "is_full_credit": false,
-      "answer_type": "單一答案"
+      "answer_type": "單一答案",
+      "explanation_source": "考選部官方標準答案校正"
     },
     {
       "id": "115-1-社會工作-36",
@@ -51824,17 +51840,18 @@
         "障礙優先",
         "容許錯誤"
       ],
-      "answer": 2,
-      "explanation": "(A)正確，尺度合宜為通用設計七原則之一，設計上考量使用者的身材和機動性 (B)正確，公平使用為通用設計七原則之一，讓每個使用者都可以無礙使用，不應該排除部分使用者 (C)錯誤，通用原則強調的是「所有人都能使用」，另有種考量身障使用族群的稱之為無障礙設計 (D)正確，容許錯誤的意思是「容許使用者犯錯」，設計上儘量消除危險和風險，即使使用方式錯誤，也不會有危險",
+      "answer": 3,
+      "explanation": "【答案校正】考選部115年第一次專門職業及技術人員高等考試「社會工作」標準答案為D。",
       "source": "https://socialworkerdaily.com/115-1-socialwork/",
-      "answer_source": "https://socialworkerdaily.com/115-1-socialwork/",
+      "answer_source": "考選部官方標準答案（115年第一次）",
       "source_name": "社工日常 socialworkerdaily",
-      "corrected": false,
+      "corrected": true,
       "accepted_answers": [
-        2
+        3
       ],
       "is_full_credit": false,
-      "answer_type": "單一答案"
+      "answer_type": "單一答案",
+      "explanation_source": "考選部官方標準答案校正"
     },
     {
       "id": "115-1-社會工作-37",
@@ -51874,17 +51891,18 @@
         "具有促進社會正義之倡導者角色職責",
         "不具有提供個人及團體治療之治療者角色職責"
       ],
-      "answer": 3,
-      "explanation": "(A)正確，在醫療體系跟社福體系都會出現精神醫療社會工作，常見的有醫院的精神科社工，社區端的康復之家、社區復健中心、會所等等 (B)正確，為常見的服務範疇 (C)正確，理論上是，因為精神疾病患者常被貼標籤歧視，故理論上工作包含去汙名化等倡議行動 (D)錯誤，其實在醫院的精神醫療團隊中，社工師也具備治療者的角色，理論上是有，只是工作比例佔比大小而已",
+      "answer": 1,
+      "explanation": "【答案校正】考選部115年第一次專門職業及技術人員高等考試「社會工作」標準答案為B。",
       "source": "https://socialworkerdaily.com/115-1-socialwork/",
-      "answer_source": "https://socialworkerdaily.com/115-1-socialwork/",
+      "answer_source": "考選部官方標準答案（115年第一次）",
       "source_name": "社工日常 socialworkerdaily",
-      "corrected": false,
+      "corrected": true,
       "accepted_answers": [
-        3
+        1
       ],
       "is_full_credit": false,
-      "answer_type": "單一答案"
+      "answer_type": "單一答案",
+      "explanation_source": "考選部官方標準答案校正"
     },
     {
       "id": "115-1-社會工作-39",
@@ -59936,6 +59954,109 @@
       "is_full_credit": false,
       "answer_type": "單一答案",
       "explanation_source": "官方標準答案＋原題題幹/選項核對"
+    },
+    {
+      "id": "111-1-社會政策與社會立法-2",
+      "year": "111",
+      "session": "1",
+      "subject": "社會政策與社會立法",
+      "number": 2,
+      "question": "李葛蘭特（Le Grand）將平等區分出五種類別，若以健康保險制度為例，下列平等類別與所舉範例何者不匹配？",
+      "choices": [
+        "使用者的平等：人民有均等使用健保服務的機會或途徑",
+        "成本的平等：健保對於人民健康改善的情況相等",
+        "公共支出的平等：健保預算均等地分配在每一位人民身上",
+        "最終所得的平等：健保制度縮小所得差異至所得均等的程度"
+      ],
+      "answer": 1,
+      "accepted_answers": [
+        1
+      ],
+      "explanation": "(B)錯誤，應該改為「最終成果平等」。",
+      "source": "https://socialworkerdaily.com/111-1-socialwork-policy/",
+      "answer_source": "考選部官方標準答案",
+      "source_name": "社工日常 socialworkerdaily",
+      "corrected": false,
+      "is_full_credit": false,
+      "answer_type": "單一答案"
+    },
+    {
+      "id": "113-1-社會工作-2",
+      "year": "113",
+      "session": "1",
+      "subject": "社會工作",
+      "number": 2,
+      "question": "依長期照顧十年計畫 2.0「社區整體照顧服務體系」之規劃，服務於「社區整合型服務中心」的社會工作者，其主要專業角色為下列何者？",
+      "choices": [
+        "個案管理者",
+        "照顧服務督導員",
+        "專業輔導人員",
+        "團體活動規劃者"
+      ],
+      "answer": 0,
+      "accepted_answers": [
+        0
+      ],
+      "explanation": "(A)正確，俗稱A個管。",
+      "source": "https://socialworkerdaily.com/113-1-socialwork/",
+      "answer_source": "考選部官方標準答案",
+      "source_name": "社工日常 socialworkerdaily",
+      "corrected": false,
+      "is_full_credit": false,
+      "answer_type": "單一答案"
+    },
+    {
+      "id": "113-1-社會工作直接服務-37",
+      "year": "113",
+      "session": "1",
+      "subject": "社會工作直接服務",
+      "number": 37,
+      "question": "有關團體發展階段的模式，下列敘述何者錯誤？",
+      "choices": [
+        "連續階段模式具有類似的階段，皆可以分成開始期、中期及結束期",
+        "連續階段觀點與重複階段觀點並非互相排斥",
+        "連續階段模式認為團體的主題背後的議題不會被完全解決，後續是會再出現的",
+        "在連續階段模式中，會認為團體的開始期是以團體感的出現來加以界定"
+      ],
+      "answer": 0,
+      "accepted_answers": [
+        0
+      ],
+      "explanation": "(A)正確。題目來源頁對第37題的解析指出(B)、(D)正確，(C)錯誤；考選部標準答案為A。",
+      "source": "https://socialworkerdaily.com/113-1-socialwork-service/",
+      "answer_source": "考選部官方標準答案",
+      "source_name": "社工日常 socialworkerdaily",
+      "corrected": false,
+      "is_full_credit": false,
+      "answer_type": "單一答案"
+    },
+    {
+      "id": "114-2-人類行為與社會環境-7",
+      "year": "114",
+      "session": "2",
+      "subject": "人類行為與社會環境",
+      "number": 7,
+      "question": "在家庭生命週期理論中，下列何者不是老年家庭（伴侶雙方退休至死亡）階段的發展任務？",
+      "choices": [
+        "適應及接受老化",
+        "接受及適應成為祖父母的角色",
+        "適應及接受退休，並能維持穩定及有品質的生活",
+        "適應喪偶及獨居生活"
+      ],
+      "answer": 0,
+      "accepted_answers": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "【一律給分】考選部114年第二次標準答案更正清冊註明第7題一律給分。",
+      "source": "https://socialworkerdaily.com/114-2-socialwork-human-behavior-and-social-environment/",
+      "answer_source": "考選部官方標準答案更正清冊",
+      "source_name": "社工日常 socialworkerdaily",
+      "corrected": true,
+      "is_full_credit": true,
+      "answer_type": "多答案給分（全給分）"
     }
   ]
 }
