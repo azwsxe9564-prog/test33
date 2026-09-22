@@ -1,0 +1,35 @@
+name: Verify official answer key
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'bank.json'
+      - 'scripts/verify_official_answers.py'
+      - '.github/workflows/verify-official-answers.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install verifier dependencies
+        run: python3 -m pip install --disable-pip-version-check requests pymupdf
+
+      - name: Compare all 12 official answer sheets
+        run: python3 scripts/verify_official_answers.py
+
+      - name: Upload verification report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: official-answer-verification
+          path: official_answer_verification.json
+          if-no-files-found: error
+          retention-days: 30
