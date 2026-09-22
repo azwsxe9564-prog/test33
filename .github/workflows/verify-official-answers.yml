@@ -10,7 +10,7 @@ on:
       - '.github/workflows/verify-official-answers.yml'
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   verify:
@@ -22,8 +22,23 @@ jobs:
       - name: Install verifier dependencies
         run: python3 -m pip install --disable-pip-version-check requests pymupdf
 
-      - name: Compare all 12 official answer sheets
+      - name: Apply official answer corrections
+        run: python3 scripts/verify_official_answers.py --fix
+
+      - name: Re-verify all 2,400 questions
         run: python3 scripts/verify_official_answers.py
+
+      - name: Commit corrected bank and verification record
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add bank.json official_answer_verification.json
+          if git diff --cached --quiet; then
+            echo "No corrections to commit."
+          else
+            git commit -m "Verify and correct official answer key"
+            git push
+          fi
 
       - name: Upload verification report
         if: always()
