@@ -65,11 +65,29 @@ def main():
                     continue
                 accepted={'ABCD'[x] for x in q.get('accepted_answers',[q['answer']])}
                 if ch not in accepted:
-                    item={'paper':paper,'subject':subject,'number':i,'bank_answer':'ABCD'[q['answer']],'accepted_answers':sorted(accepted),'official_answer':ch,'id':q.get('id')}
+                    item={'paper':paper,'subject':subject,'number':i,'bank_answer':'ABCD'[q['answer']],'accepted_answers':sorted(accepted),'official_answer':ch,'id':q.get('id'),'source_url':url}
                     ss['mismatches'].append(item); report['mismatches'].append(item)
             p['subjects'].append(ss)
         report['papers'].append(p)
     report['totals']={'papers':12,'subjects':60,'questions':2400,'mismatches':len(report['mismatches']),'unresolved':len(report['unresolved']),'parse_errors':sum(1 for p in report['papers'] for s in p['subjects'] if s.get('status')=='parse_error')}
+    if '--fix' in sys.argv and not report['totals']['parse_errors'] and not report['unresolved']:
+        from datetime import datetime,timezone
+        now=datetime.now(timezone.utc).isoformat()
+        for item in report['mismatches']:
+            q=by[(item['paper'],item['subject'],item['number'])]
+            old_ans='ABCD'[q['answer']]; new_ans=item['official_answer']
+            q['answer']='ABCD'.index(new_ans)
+            q['accepted_answers']=[q['answer']]
+            q['corrected']=True
+            q['answer_source']='考選部官方標準答案（逐題驗證）'
+            q['answer_verified_at']=now
+            log=q.get('answer_correction_log',[])
+            if not isinstance(log,list): log=[]
+            log.append({'verified_at':now,'source':item['source_url'],'previous_answer':old_ans,'corrected_answer':new_ans})
+            q['answer_correction_log']=log
+        Path('bank.json').write_text(json.dumps(bank,ensure_ascii=False,indent=2),encoding='utf-8')
+        print('APPLIED_CORRECTIONS',len(report['mismatches']))
+        return
     Path('official_answer_verification.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
     print(json.dumps(report['totals'],ensure_ascii=False))
     for x in report['mismatches'][:200]: print('MISMATCH',json.dumps(x,ensure_ascii=False))
