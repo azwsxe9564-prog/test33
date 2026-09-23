@@ -79,6 +79,30 @@ $('start').addEventListener('click',start);$('reset').addEventListener('click',(
 $('login').addEventListener('click',async()=>{const email=$('email').value.trim();if(!email){setAuthStatus('請先輸入電子郵件。','bad');return}if(!client){setAuthStatus('登入服務尚未載入，請重新整理頁面後再試。','bad');return}$('login').disabled=true;try{const {error}=await client.auth.signInWithOtp({email,options:{emailRedirectTo:location.href.split('#')[0]}});if(error)throw error;setAuthStatus('登入連結已寄出，請到信箱點擊連結返回網站。','ok')}catch(e){setAuthStatus('寄送失敗：'+(e.message||'請確認電子郵件設定'),'bad')}finally{$('login').disabled=false}});
 $('logout').addEventListener('click',async()=>{if(!client)return;const {error}=await client.auth.signOut();if(error){setAuthStatus('登出失敗：'+error.message,'bad');return}user=null;$('logout').hidden=true;$('login').hidden=false;setAuthStatus('已登出；目前裝置仍保留本機進度。');setSyncStatus('登入後會同步出題進度與作答統計。')});
 if(window.supabase?.createClient){client=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);client.auth.onAuthStateChange((event,session)=>{user=session?.user||null;if(user){$('login').hidden=true;$('logout').hidden=false;setAuthStatus('已登入：'+user.email,'ok');if(bankReady)syncCloud()}else{$('login').hidden=false;$('logout').hidden=true;setAuthStatus('尚未登入；目前進度保存在此瀏覽器。')}})}else{setAuthStatus('登入元件載入失敗；請確認網路連線後重新整理。','bad')}
-(async()=>{const bankUrls=['./bank.json?v=20260923','https://raw.githubusercontent.com/azwsxe9564-prog/test33/main/bank.json'];let lastError=null;for(const bankUrl of bankUrls){try{const r=await fetch(bankUrl,{cache:'no-store'});if(!r.ok)throw Error(`HTTP ${r.status}`);const data=await r.json();bank=Array.isArray(data)?data:(data.questions||[]);break}catch(e){lastError=e}}if(!Array.isArray(bank)||!bank.length)throw(lastError||new Error('題庫為空'));{bank=Array.isArray(data)?data:(data.questions||[]);const papers=[...new Set(bank.map(q=>paperKey(q)).filter(Boolean))].sort((a,b)=>{const pa=a.split('-').map(Number),pb=b.split('-').map(Number);return pa[0]-pb[0]||pa[1]-pb[1]});papers.forEach(p=>{const o=document.createElement('option');o.value=p;o.textContent=p;$('year').append(o)});subjects.forEach(s=>{const o=document.createElement('option');o.value=s;o.textContent=s;$('subject').append(o)});state=SWStudyEngine.readState();stats=normalizeStats(safeParse(localStorage.getItem(STATS_KEY),stats));bankReady=true;$('loadStatus').textContent=`題庫載入 ${bank.length.toLocaleString()} 題。選擇快問快答或指定年度模擬考後開始。`;renderStats();if(user)syncCloud()}}catch(e){$('loadStatus').textContent=`題庫載入失敗：${e.message}。已嘗試 GitHub Pages 與 GitHub Raw 題庫來源，請重新整理頁面。`}})();
+(async()=>{try{
+const bankUrls=['./bank.json?v=20260923','https://raw.githubusercontent.com/azwsxe9564-prog/test33/main/bank.json'];
+let lastError=null;
+for(const bankUrl of bankUrls){
+  try{
+    const r=await fetch(bankUrl,{cache:'no-store'});
+    if(!r.ok)throw Error(`HTTP ${r.status}`);
+    const data=await r.json();
+    bank=Array.isArray(data)?data:(data.questions||[]);
+    break;
+  }catch(e){lastError=e}
+}
+if(!Array.isArray(bank)||!bank.length)throw(lastError||new Error('題庫為空'));
+const papers=[...new Set(bank.map(q=>paperKey(q)).filter(Boolean))].sort((a,b)=>{const pa=a.split('-').map(Number),pb=b.split('-').map(Number);return pa[0]-pb[0]||pa[1]-pb[1]});
+papers.forEach(p=>{const o=document.createElement('option');o.value=p;o.textContent=p;$('year').append(o)});
+subjects.forEach(s=>{const o=document.createElement('option');o.value=s;o.textContent=s;$('subject').append(o)});
+state=SWStudyEngine.readState();
+stats=normalizeStats(safeParse(localStorage.getItem(STATS_KEY),stats));
+bankReady=true;
+$('loadStatus').textContent=`題庫載入 ${bank.length.toLocaleString()} 題。選擇快問快答或指定年度模擬考後開始。`;
+renderStats();
+if(user)syncCloud();
+}catch(e){
+$('loadStatus').textContent=`題庫載入失敗：${e.message}。已嘗試 GitHub Pages 與 GitHub Raw 題庫來源，請重新整理頁面。`;
+}})();
 })();
 </script></body></html>
