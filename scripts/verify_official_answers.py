@@ -42,8 +42,32 @@ def parse_pdf(data):
     if len(out)!=40: raise ValueError(f'parsed {len(out)}/40 questions; q={sorted(out)}')
     return ''.join(out[i] for i in range(1,41))
 
+def clean_embedded_explanations(bank):
+    changed=0
+    for q in bank.get('questions',[]):
+        choices=q.get('choices')
+        if not isinstance(choices,list):
+            continue
+        for i,choice in enumerate(choices):
+            if not isinstance(choice,str):
+                continue
+            m=re.search(r'\\s*[，,]?\\s*解析：',choice)
+            if not m:
+                continue
+            clean=choice[:m.start()].rstrip(' ，,')
+            extracted=choice[m.end():].strip()
+            if clean != choice:
+                choices[i]=clean
+                changed+=1
+            if extracted:
+                q['explanation']=extracted
+    return changed
+
 def main():
     bank=json.loads(Path('bank.json').read_text(encoding='utf-8'))
+    cleaned=clean_embedded_explanations(bank)
+    if cleaned:
+        print('CLEANED_EMBEDDED_EXPLANATIONS',cleaned)
     by={(f'{q["year"]}-{q.get("session","")}',q['subject'],q['number']):q for q in bank['questions']}
     report={'papers':[],'mismatches':[],'unresolved':[]}
     S=requests.Session(); S.headers['User-Agent']='Mozilla/5.0'
@@ -87,6 +111,7 @@ def main():
             q['answer_correction_log']=log
         Path('bank.json').write_text(json.dumps(bank,ensure_ascii=False,indent=2),encoding='utf-8')
         print('APPLIED_CORRECTIONS',len(report['mismatches']))
+        print('CLEANED_EMBEDDED_EXPLANATIONS',cleaned)
         return
     Path('official_answer_verification.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
     print(json.dumps(report['totals'],ensure_ascii=False))
