@@ -144,9 +144,11 @@ function render(){
       }
       const src=document.createElement('div');src.className='source';
       if(x.verified){
-        const r=sourceFor(q);src.innerHTML='答案核對：<strong>已核對</strong>｜官方來源：';
+        const r=sourceFor(q);
+        src.append(document.createTextNode('答案核對：'));
+        const strong=document.createElement('strong');strong.textContent='已核對';src.append(strong,document.createTextNode('｜官方來源：'));
         const a=document.createElement('a');a.href=r.url;a.target='_blank';a.rel='noopener noreferrer';a.textContent='考選部標準答案';src.append(a);
-        if(x.officialIdx!==null&&!x.localAccepted.includes(x.officialIdx))src.innerHTML+=' <span class="wrong">⚠ 題庫答案與官方核對結果不同，請勿直接使用舊資料。</span>';
+        if(x.officialIdx!==null&&!x.localAccepted.includes(x.officialIdx)){const warn=document.createElement('span');warn.className='wrong';warn.textContent='　⚠ 題庫答案與官方核對結果不同，請勿直接使用舊資料。';src.append(warn);}
       }else src.textContent='答案核對：目前找不到這一題對應的官方核對紀錄。';
       item.append(src);sec.append(item);
     });
