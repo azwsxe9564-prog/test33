@@ -1,0 +1,494 @@
+{
+  "papers": [
+    {
+      "paper": "110-1",
+      "subjects": [
+        {
+          "subject": "社會工作",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=105&code=110030&q=1&s=0401&t=S",
+          "official": "CCCDCCDADADBCACBCDBBDDDADCDABAABDCCBDADA",
+          "mismatches": []
+        },
+        {
+          "subject": "社會工作直接服務",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=105&code=110030&q=1&s=0402&t=S",
+          "official": "CDCDDCDDDCCBDACDDCCBBDBACCCBBBABCDDDCABD",
+          "mismatches": []
+        },
+        {
+          "subject": "社會政策與社會立法",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=105&code=110030&q=1&s=0404&t=S",
+          "official": "BBCACDBDBCDCABAADBAABDACDBACDDDCDDACCBCC",
+          "mismatches": []
+        },
+        {
+          "subject": "人類行為與社會環境",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=105&code=110030&q=1&s=0405&t=S",
+          "official": "CBAADDACABDACDADBACBDDCACCACCABCBABDDAAD",
+          "mismatches": []
+        },
+        {
+          "subject": "社會工作研究方法",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=105&code=110030&q=1&s=0406&t=S",
+          "official": "DABCDDDBDAADDABCBDDBDCABCDDDCCDACDBBCCCD",
+          "mismatches": []
+        }
+      ]
+    },
+    {
+      "paper": "110-2",
+      "subjects": [
+        {
+          "subject": "社會工作",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=105&code=110111&q=1&s=0401&t=S",
+          "official": "CBBBDADADDCBADBDCCBCCDDBADDABCDCACCAADAA",
+          "mismatches": []
+        },
+        {
+          "subject": "社會工作直接服務",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=105&code=110111&q=1&s=0402&t=S",
+          "official": "CBCACCBCCCCCACBCCDCDDCBCCABDACACACBCBDDC",
+          "mismatches": []
+        },
+        {
+          "subject": "社會政策與社會立法",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=105&code=110111&q=1&s=0404&t=S",
+          "official": "CDDDBDDDCDDDBDBDABDBAACDBBBCBBDBAADDCCDD",
+          "mismatches": []
+        },
+        {
+          "subject": "人類行為與社會環境",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=105&code=110111&q=1&s=0405&t=S",
+          "official": "DCDBCCDBACACBCCCDDCDABADBABBDADDCDCCCACC",
+          "mismatches": []
+        },
+        {
+          "subject": "社會工作研究方法",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=105&code=110111&q=1&s=0406&t=S",
+          "official": "DCAAADDADCADCCBCDBBDBABADDBDABBACCBCAACD",
+          "mismatches": []
+        }
+      ]
+    },
+    {
+      "paper": "111-1",
+      "subjects": [
+        {
+          "subject": "社會工作",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=105&code=111030&q=1&s=0401&t=S",
+          "official": "DCCBBAAACDDADBBCAACDDDCACDBCDAADADDDADCC",
+          "mismatches": []
+        },
+        {
+          "subject": "社會工作直接服務",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=105&code=111030&q=1&s=0402&t=S",
+          "official": "ADADDAAACDDDBDDBCBBBDDADACBBBCCCADCACDAC",
+          "mismatches": []
+        },
+        {
+          "subject": "社會政策與社會立法",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=105&code=111030&q=1&s=0404&t=S",
+          "official": "DBCBABDDCABCBDCCBDCADCBBCBACCAAABAACABAD",
+          "mismatches": []
+        },
+        {
+          "subject": "人類行為與社會環境",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=105&code=111030&q=1&s=0405&t=S",
+          "official": "CBDCBBDBBBABBBBACBDBDCCDBABACBADABADDBAC",
+          "mismatches": []
+        },
+        {
+          "subject": "社會工作研究方法",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=105&code=111030&q=1&s=0406&t=S",
+          "official": "BDAADDDCBABDBCDDCBCAACABADAABDCBDDCDBDAD",
+          "mismatches": []
+        }
+      ]
+    },
+    {
+      "paper": "111-2",
+      "subjects": [
+        {
+          "subject": "社會工作",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=105&code=111110&q=1&s=0401&t=S",
+          "official": "DCBBCACBCCDCDBABCAACACADBAACADADACDBBCCD",
+          "mismatches": []
+        },
+        {
+          "subject": "社會工作直接服務",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=105&code=111110&q=1&s=0402&t=S",
+          "official": "BBABABDADDBBCBDCCDAACBACACAADDCACBDDABBC",
+          "mismatches": []
+        },
+        {
+          "subject": "社會政策與社會立法",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=105&code=111110&q=1&s=0404&t=S",
+          "official": "CCABDDADACDACDADDBCCAADACBDDBBDBDCAACCBD",
+          "mismatches": []
+        },
+        {
+          "subject": "人類行為與社會環境",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=105&code=111110&q=1&s=0405&t=S",
+          "official": "DBCABDBDDADCBCDDCDBDCBCCDABDBADCCACBCBAB",
+          "mismatches": []
+        },
+        {
+          "subject": "社會工作研究方法",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=105&code=111110&q=1&s=0406&t=S",
+          "official": "AABAACCABDCDBACDCACBCDABCABADBADDCCCACAB",
+          "mismatches": []
+        }
+      ]
+    },
+    {
+      "paper": "112-1",
+      "subjects": [
+        {
+          "subject": "社會工作",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=112030&q=1&s=0301&t=S",
+          "official": "CCDACBCAADBDBAABBBDCDDBDBDBACCDADBDAABBD",
+          "mismatches": []
+        },
+        {
+          "subject": "社會工作直接服務",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=112030&q=1&s=0302&t=S",
+          "official": "DCBAACCCBDBCACABDBBCDBCBCBBACDDAABDBDBAB",
+          "mismatches": []
+        },
+        {
+          "subject": "社會政策與社會立法",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=112030&q=1&s=0304&t=S",
+          "official": "BADCCABABADAAABDAADDBBDAADDBCABDDCAABCDD",
+          "mismatches": []
+        },
+        {
+          "subject": "人類行為與社會環境",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=112030&q=1&s=0305&t=S",
+          "official": "CDCDACBADDCCBBCABADDCCBACDDCADDCDCABACCC",
+          "mismatches": []
+        },
+        {
+          "subject": "社會工作研究方法",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=112030&q=1&s=0306&t=S",
+          "official": "BCCCADDCABDBCBABDDDABBCADBDABCBDCBDBBBBA",
+          "mismatches": []
+        }
+      ]
+    },
+    {
+      "paper": "112-2",
+      "subjects": [
+        {
+          "subject": "社會工作",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=112110&q=1&s=0301&t=S",
+          "official": "CBDAABBDBDACDCDBAADBADABBCADCBBBDCCAACBA",
+          "mismatches": []
+        },
+        {
+          "subject": "社會工作直接服務",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=112110&q=1&s=0302&t=S",
+          "official": "CCCBDBBADBCBAAACCCCDCBCBCDCBCDAACBBCCCDD",
+          "mismatches": []
+        },
+        {
+          "subject": "社會政策與社會立法",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=112110&q=1&s=0304&t=S",
+          "official": "DBDACAACACCBDBDDDCCAADCAACCADCADBBCABCDD",
+          "mismatches": []
+        },
+        {
+          "subject": "人類行為與社會環境",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=112110&q=1&s=0305&t=S",
+          "official": "BBBCBCAACCCCCBBBBCDBDBDBDBBCBBCCBCDDCABD",
+          "mismatches": []
+        },
+        {
+          "subject": "社會工作研究方法",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=112110&q=1&s=0306&t=S",
+          "official": "BBDBCCDBBAADBBBADCDACDBCBCABABBCABDDBCBB",
+          "mismatches": []
+        }
+      ]
+    },
+    {
+      "paper": "113-1",
+      "subjects": [
+        {
+          "subject": "社會工作",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=113030&q=1&s=0301&t=S",
+          "official": "DABBDCDAADBACCBDBCDDDACBCAACAABABCBABAAD",
+          "mismatches": []
+        },
+        {
+          "subject": "社會工作直接服務",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=113030&q=1&s=0302&t=S",
+          "official": "CBDBBBACDDCCCCCDCBABCACABDACCAAABCBCCDCD",
+          "mismatches": []
+        },
+        {
+          "subject": "社會政策與社會立法",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=113030&q=1&s=0304&t=S",
+          "official": "ACBBDCCCACBACAACCDCCCAACBCCBBDDDDBADBACB",
+          "mismatches": []
+        },
+        {
+          "subject": "人類行為與社會環境",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=113030&q=1&s=0305&t=S",
+          "official": "DABBCCACCCBDBCBDBDCADBBBDBDBABAABCBDBAAC",
+          "mismatches": []
+        },
+        {
+          "subject": "社會工作研究方法",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=113030&q=1&s=0306&t=S",
+          "official": "CAADAACBABCCBDBADCCCDBDBADDDDACCBDACBBDA",
+          "mismatches": []
+        }
+      ]
+    },
+    {
+      "paper": "113-2",
+      "subjects": [
+        {
+          "subject": "社會工作",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=113100&q=1&s=0301&t=S",
+          "official": "CDADCBABCBDDDCADDBDCADBADADBCACBDDCDCBBB",
+          "mismatches": []
+        },
+        {
+          "subject": "社會工作直接服務",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=113100&q=1&s=0302&t=S",
+          "official": "BDBCBBBDBDCBBABACBCDDBBCCCACAABDCAADDABC",
+          "mismatches": []
+        },
+        {
+          "subject": "社會政策與社會立法",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=113100&q=1&s=0304&t=S",
+          "official": "BBDDDCDADCDDCBCDCCCBDDAAABABAACDBCADDCAA",
+          "mismatches": []
+        },
+        {
+          "subject": "人類行為與社會環境",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=113100&q=1&s=0305&t=S",
+          "official": "BCBDCBDBDDBAAACBDCCBDBBAAADCDCAABBABCCDD",
+          "mismatches": []
+        },
+        {
+          "subject": "社會工作研究方法",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=113100&q=1&s=0306&t=S",
+          "official": "DBACACCDCBADCDDCDADAABDDDCDDBCCDADACCBAD",
+          "mismatches": []
+        }
+      ]
+    },
+    {
+      "paper": "114-1",
+      "subjects": [
+        {
+          "subject": "社會工作",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=114030&q=1&s=0301&t=S",
+          "official": "DACCBBDABCDBBDABCDDCCADBBAABBDCCBCDDCDCD",
+          "mismatches": []
+        },
+        {
+          "subject": "社會工作直接服務",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=114030&q=1&s=0302&t=S",
+          "official": "ACCDCCADBDDCCAACBBCBCBDCBCDCDDADDBDADDCC",
+          "mismatches": []
+        },
+        {
+          "subject": "社會政策與社會立法",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=114030&q=1&s=0304&t=S",
+          "official": "BBACCCACACDDBBDDDBCBBBADDBDCCBCCCBADABAA",
+          "mismatches": []
+        },
+        {
+          "subject": "人類行為與社會環境",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=114030&q=1&s=0305&t=S",
+          "official": "BABCACDBDDCBBBCBCCDCCDCCBACADCCABBDABCDD",
+          "mismatches": []
+        },
+        {
+          "subject": "社會工作研究方法",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=114030&q=1&s=0306&t=S",
+          "official": "CCDCACCBDBBBDCBCABCDBAAADAACBBAACCDACBAB",
+          "mismatches": []
+        }
+      ]
+    },
+    {
+      "paper": "114-2",
+      "subjects": [
+        {
+          "subject": "社會工作",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=114100&q=1&s=0301&t=S",
+          "official": "DCDBBBAACDABBBABCCBBCBAAABDADDBBBADDBBCA",
+          "mismatches": []
+        },
+        {
+          "subject": "社會工作直接服務",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=114100&q=1&s=0302&t=S",
+          "official": "BBCBDAADBDCCCCADABDCCDAACACDBCBCDBBACAAD",
+          "mismatches": []
+        },
+        {
+          "subject": "社會政策與社會立法",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=114100&q=1&s=0304&t=S",
+          "official": "CACAAABDDBBDDDADADDBAAACBCDBBADCDDCADABC",
+          "mismatches": []
+        },
+        {
+          "subject": "人類行為與社會環境",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=114100&q=1&s=0305&t=S",
+          "official": "CABDCCBABAADADADCBBCABDDBDDAADCBCADCDCCC",
+          "mismatches": []
+        },
+        {
+          "subject": "社會工作研究方法",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=114100&q=1&s=0306&t=S",
+          "official": "DCCBACDDABABDCAADDCDDABCDBDBDADABCDADBBA",
+          "mismatches": []
+        }
+      ]
+    },
+    {
+      "paper": "115-1",
+      "subjects": [
+        {
+          "subject": "社會工作",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=115030&q=1&s=0301&t=S",
+          "official": "CBCBCAADCDCABBBDCCCCAABDDDCBCBACAACCCDCB",
+          "mismatches": []
+        },
+        {
+          "subject": "社會工作直接服務",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=115030&q=1&s=0302&t=S",
+          "official": "CBCABCCACDABCBDDDACDBABBDDBBDDDCCCCCDCCD",
+          "mismatches": []
+        },
+        {
+          "subject": "社會政策與社會立法",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=115030&q=1&s=0303&t=S",
+          "official": "ABBAAACCDCBDCCCBBDACDADABABDDDADCCBBAABD",
+          "mismatches": []
+        },
+        {
+          "subject": "人類行為與社會環境",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=115030&q=1&s=0304&t=S",
+          "official": "DDCBBCDBDCCDACDBACBDABBBBABCCDDACCABDCDA",
+          "mismatches": []
+        },
+        {
+          "subject": "社會工作研究方法",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=115030&q=1&s=0305&t=S",
+          "official": "BDDABCBADABBBBDABCCBCADAADDACBCDBAADABDA",
+          "mismatches": []
+        }
+      ]
+    },
+    {
+      "paper": "115-2",
+      "subjects": [
+        {
+          "subject": "社會工作",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=115100&q=1&s=0301&t=S",
+          "official": "CCBACDBDCDCCDCBDDDABDDCBAADBCCCBCADDDCCC",
+          "mismatches": []
+        },
+        {
+          "subject": "社會工作直接服務",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=115100&q=1&s=0302&t=S",
+          "official": "BCDCCDBDDDCADCCCBBCCDADBCDACAAABACADDDCB",
+          "mismatches": []
+        },
+        {
+          "subject": "社會政策與社會立法",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=115100&q=1&s=0303&t=S",
+          "official": "CACCBDDAAABBADDBACBABDCCCBCDDCBBDDBDBBDC",
+          "mismatches": []
+        },
+        {
+          "subject": "人類行為與社會環境",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=115100&q=1&s=0304&t=S",
+          "official": "DBABCADCDDAACBBAACDCCDCDCCCBCCBDAACDBDCC",
+          "mismatches": []
+        },
+        {
+          "subject": "社會工作研究方法",
+          "status": "checked",
+          "url": "https://wwwq.moex.gov.tw/exam/wHandExamQandA_File.ashx?c=103&code=115100&q=1&s=0305&t=S",
+          "official": "DAABBACCBCDBDDBCAACABBCDCABDBDDACCCDADBC",
+          "mismatches": []
+        }
+      ]
+    }
+  ],
+  "mismatches": [],
+  "unresolved": [],
+  "totals": {
+    "papers": 12,
+    "subjects": 60,
+    "questions": 2400,
+    "mismatches": 0,
+    "unresolved": 0,
+    "parse_errors": 0
+  }
+}

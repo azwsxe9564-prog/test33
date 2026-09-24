@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>我的快速複習筆記｜正式版</title>
+<style>
+:root{font-family:system-ui,-apple-system,"Noto Sans TC",sans-serif;color:#20242b;background:#f5f7fb}
+*{box-sizing:border-box}body{margin:0;padding:20px}.wrap{max-width:980px;margin:auto}
+.panel{background:#fff;border:1px solid #dfe4ec;border-radius:16px;padding:20px;margin:14px 0;box-shadow:0 2px 8px #17203308}
+h1{font-size:clamp(1.5rem,4vw,2rem);margin:0 0 8px}h2{font-size:1.2rem;margin:0 0 12px}h3{margin:0 0 8px}
+.muted{color:#667085}.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+button,select{font:inherit;border:1px solid #cbd3df;border-radius:9px;padding:10px;background:#fff;cursor:pointer}
+button.primary{background:#245fc7;color:#fff;border-color:#245fc7}.notice{background:#eef6ff;border:1px solid #c8ddf7;padding:12px;border-radius:10px;line-height:1.65}
+.summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.metric{border:1px solid #e3e8ef;background:#fafbfc;border-radius:12px;padding:12px}.metric b{display:block;font-size:1.35rem;margin-top:4px}
+.subject{border:1px solid #e3e8ef;border-radius:14px;padding:16px;margin:12px 0}.subject-head{display:flex;justify-content:space-between;gap:12px;align-items:center}
+.badge{display:inline-block;border-radius:99px;background:#fff0ee;color:#a52822;padding:3px 9px;font-size:.84rem}.badge.normal{background:#eef2f7;color:#475467}
+.item{border:1px solid #e5e9ef;border-radius:12px;padding:14px;margin:10px 0;background:#fff}.concept{border:1px solid #dbe3ef;border-radius:16px;padding:18px 20px;margin:14px 0;background:#fbfcfe}.concept h3{margin:0 0 5px;font-size:1.12rem}.concept-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:10px;margin-top:14px}.concept-box{background:#fff;border:1px solid #e6eaf0;border-radius:11px;padding:12px 14px;line-height:1.75}.concept-label{font-weight:700;margin-bottom:5px;color:#475467}.concept-q{margin-top:12px;font-size:.86rem}.concept-q summary{cursor:pointer;color:#667085;list-style:none}.concept-q summary::-webkit-details-marker{display:none}.concept-q summary::before{content:'＋';display:inline-block;margin-right:5px}.concept-q[open] summary::before{content:'－'}.concept-q-list{padding:8px 0 0 2px}.concept-q span{display:inline-block;margin:3px 5px 3px 0;padding:3px 8px;border-radius:99px;background:#f0f3f7;color:#667085}.concept-note{font-size:.8rem;color:#98a2b3;margin-top:9px}{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.item-q{font-weight:700;line-height:1.6;margin:8px 0}.answer-line{line-height:1.7}.wrong{color:#a52822;font-weight:700}.correct{color:#146c43;font-weight:700}
+.explain{background:#f7f8fa;border-radius:10px;padding:11px;line-height:1.7;margin-top:10px}.source{font-size:.86rem;margin-top:9px}.source a{color:#245fc7}
+.empty{text-align:center;padding:24px;border:1px dashed #cfd6e1;border-radius:12px;color:#667085}.loading{padding:18px;text-align:center;color:#667085}
+@media(max-width:700px){body{padding:10px}.panel{padding:14px}.summary{grid-template-columns:repeat(2,minmax(0,1fr))}.concept-grid{grid-template-columns:1fr}.subject-head{align-items:flex-start;flex-direction:column}}
+@media print{body{background:#fff;padding:0}.wrap{max-width:none}.panel{box-shadow:none;border:0;padding:0;margin:0 0 16px}.no-print,.notice{display:none!important}.subject,.item{break-inside:avoid;border:1px solid #aaa}.explain{background:#fff;border:1px solid #ddd}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body><main class="wrap">
+<header class="panel">
+  <div class="row" style="justify-content:space-between">
+    <div><h1>我的快速複習筆記</h1><p class="muted">只從你的實際作答紀錄整理；正式答案以可核對的考選部資料為準。</p></div>
+    <button class="primary no-print" onclick="window.print()">列印／另存 PDF</button>
+  </div>
+  <p class="notice"><strong>資料規則：</strong>本頁不再使用示範題。先讀取目前瀏覽器的真實作答紀錄；若已登入，再讀取同一帳號的雲端作答紀錄。複習題目來自目前題庫，正確答案會再以「官方答案核對報告」確認；官方來源連結直接指向考選部。</p>
+</header>
+
+<section class="panel"><h2>這次抓到的複習重點</h2><div id="summary" class="summary"></div><p id="dataStatus" class="muted">正在讀取你的作答紀錄……</p></section>
+<section class="panel"><h2>你的常錯關鍵概念／理論</h2><p class="muted">依你的實際錯題、題目文字與既有解析歸納；這是個人化學習分析，不是考選部官方分類。系統只在有足夠錯題證據時建立概念。</p><div id="concepts" class="loading">正在分析……</div></section>
+<section class="panel no-print"><div class="row"><label>篩選科目 <select id="subjectFilter"><option value="all">全部科目</option></select></label><label>排序 <select id="sort"><option value="wrong">最常答錯</option><option value="recent">最近答錯</option></select></label></div></section>
+<section class="panel"><div id="notes" class="loading">正在整理……</div></section>
+<p class="muted">正式版｜保留歷史錯誤，但會依最近作答自動區分「需要複習」與「已導正」；連續答對 3 次視為已導正，不刪除歷史紀錄。官方答案核對狀態與來源會標示在每題下方。</p>
+</main>
+<script>
+(()=>{'use strict';
+const SUPABASE_URL='https://cnlaurnbzlwcrcqsomfu.supabase.co';
+const SUPABASE_KEY='sb_publishable_uffszUPEIM658pLMPnklpg_byZX0J8n';
+const STATS_KEY='sw_quiz_stats_v1';
+const $=id=>document.getElementById(id);
+const letter=n=>Number.isFinite(Number(n))?String.fromCharCode(65+Number(n)):'—';
+const parse=s=>{try{return JSON.parse(s)||null}catch(_){return null}};
+const paperKey=q=>q&&q.session?String(q.year)+'-'+String(q.session):String(q?.year||'');
+const qnum=q=>{for(const k of ['questionNumber','question_number','number','no','num','qno']){const n=Number(q?.[k]);if(Number.isFinite(n))return n}return null};
+const accepted=q=>Array.isArray(q?.accepted_answers)&&q.accepted_answers.length?q.accepted_answers:[q?.answer];
+let bank=[],verification={},records=[],stats=null;
+
+function loadLocal(){const raw=parse(localStorage.getItem(STATS_KEY)||'{}')||{};return raw}
+function dedupeAnswers(list){
+  const seen=new Set();
+  return (Array.isArray(list)?list:[]).filter(a=>{
+    const k=[a.id,a.date,a.chosen,a.source].join('|');
+    if(seen.has(k))return false;seen.add(k);return true;
+  });
+}
+function mergeStats(local,cloud){
+  if(!cloud)return local||{};
+  const a=dedupeAnswers([...(local?.answers||[]),...(cloud?.answers||[])]);
+  const wrongCounts={...(local?.wrongCounts||{})};
+  Object.entries(cloud?.wrongCounts||{}).forEach(([k,v])=>wrongCounts[k]=Math.max(Number(wrongCounts[k])||0,Number(v)||0));
+  return {...local,...cloud,answers:a,wrongCounts};
+}
+function officialMap(){
+  const m=new Map();
+  for(const p of verification.papers||[])for(const s of p.subjects||[]){
+    m.set(p.paper+'|'+s.subject,{...s,paper:p.paper});
+  }
+  return m;
+}
+function sourceFor(q){
+  const r=verification._map?.get(paperKey(q)+'|'+(q.subject||''));
+  return r||null;
+}
+function officialAnswerFor(q){
+  const r=sourceFor(q),n=qnum(q);
+  if(!r||!n||!r.official||n>r.official.length)return null;
+  return r.official[n-1];
+}
+function answerProgress(id){
+  const arr=records.filter(a=>String(a.id)===String(id)&&a.chosen!=null&&a.chosen!=='').sort((a,b)=>(Number(a.date)||0)-(Number(b.date)||0));
+  let streak=0;
+  for(let i=arr.length-1;i>=0;i--){
+    if(arr[i].correct)streak++; else break;
+  }
+  const last=arr[arr.length-1]||null;
+  return {streak,lastDate:Number(last?.date)||0,lastCorrect:!!last?.correct};
+}
+function buildRows(){
+  const byId=new Map(bank.map(q=>[String(q.id),q]));
+  const wrongById={};
+  records.forEach(a=>{
+    if(a.chosen==null||a.chosen==='')return;
+    if(!a.correct)wrongById[String(a.id)]=(wrongById[String(a.id)]||0)+1;
+  });
+  Object.entries(stats?.wrongCounts||{}).forEach(([id,n])=>wrongById[id]=Math.max(wrongById[id]||0,Number(n)||0));
+  const lastById={};
+  records.forEach(a=>{if(!a.correct)lastById[String(a.id)]=Math.max(lastById[String(a.id)]||0,Number(a.date)||0)});
+  return Object.entries(wrongById).map(([id,wrong])=>{
+    const q=byId.get(id);if(!q||wrong<1)return null;
+    const progress=answerProgress(id);
+    const resolved=progress.lastCorrect&&progress.streak>=3;
+    const official=officialAnswerFor(q);
+    const localAccepted=accepted(q).map(Number);
+    const officialIdx=official?official.charCodeAt(0)-65:null;
+    return {q,wrong,last:lastById[id]||0,official,officialIdx,localAccepted,verified:!!sourceFor(q),...progress,resolved};
+  }).filter(Boolean);
+}
+function renderSummary(rows){
+  const subjects=[...new Set(rows.map(x=>x.q.subject).filter(Boolean))];
+  const repeated=rows.filter(x=>x.wrong>=3&&!x.resolved).length;
+  const resolved=rows.filter(x=>x.resolved).length;
+  const verified=rows.filter(x=>x.verified).length;
+  $('summary').innerHTML='';
+  [['目前需要複習',rows.filter(x=>!x.resolved).length],['反覆錯誤 ≥3 次',repeated],['已導正',resolved],['官方答案可核對',verified]].forEach(([a,b])=>{
+    const d=document.createElement('div');d.className='metric';d.innerHTML='<span class="muted"></span><b></b>';d.querySelector('span').textContent=a;d.querySelector('b').textContent=b; $('summary').append(d);
+  });
+}
+function populateSubjects(rows){
+  const sel=$('subjectFilter'),keep=sel.value;
+  [...new Set(rows.map(x=>x.q.subject).filter(Boolean))].sort().forEach(s=>{const o=document.createElement('option');o.value=s;o.textContent=s;sel.append(o)});
+  if([...sel.options].some(o=>o.value===keep))sel.value=keep;
+}
+const CONCEPTS=[
+ {name:'系統理論',keywords:['系統理論','一般系統','次系統','系統界限','界限','回饋','開放系統','封閉系統','系統間','結構功能'],core:'把個人、家庭、團體或組織視為彼此互動的系統，重點在界限、次系統、輸入／輸出、回饋與系統間關係。',confuse:'看到「界限、次系統、回饋、系統互動」時，通常是在考系統觀點；不要只因題目出現「環境」就直接判定為生態觀點。',cue:'界限／次系統／回饋／系統互動 → 系統理論'},
+ {name:'生態觀點',keywords:['生態觀點','生態系統','人與環境','人境交易','交易','適應','環境壓力','生活環境','生態學'],core:'強調人與環境持續互動與相互影響，關注個人與家庭、社區、制度等環境之間的交易與適應。',confuse:'「人與環境」是重要線索，但若題幹特別談界限、次系統、回饋，仍可能是在考系統理論。',cue:'適應／交易／人與環境 → 生態觀點'},
+ {name:'優勢觀點',keywords:['優勢觀點','優勢取向','strengths perspective','資源','能力','希望','復元','賦權','增權'],core:'從案主的能力、資源、支持與可能性出發，而不只聚焦問題與缺陷。',confuse:'「找問題、診斷缺陷」與「找能力、資源、可能性」是常見對照。',cue:'能力／資源／希望／可能性 → 優勢觀點'},
+ {name:'賦權／增權',keywords:['賦權','增權','empowerment','權力','無力感','參與決策','自主'],core:'重點在提升個人或群體對自身生活與環境的控制、參與及決策能力，並處理權力不平等。',confuse:'不要把「提供服務」本身等同賦權；關鍵是權力、參與、自主與能力提升。',cue:'權力／自主／參與決策 → 賦權'},
+ {name:'危機介入',keywords:['危機介入','危機理論','危機','急性危機','平衡','失衡','危機處遇'],core:'危機介入聚焦當下危機造成的失衡與功能受損，通常先處理安全、立即需求與恢復基本因應能力。',confuse:'與長期深度治療相比，危機介入通常更聚焦當下與短期穩定。',cue:'當下危機／失衡／立即安全 → 危機介入'},
+ {name:'個案工作',keywords:['個案工作','個案管理','個別化','案主','個案服務','casework'],core:'以個人及其生活環境為工作單位，透過關係建立、評估、介入與資源連結協助處理問題。',confuse:'若題目核心是成員互動與團體歷程，應優先辨識為團體工作；若是社區權力與集體行動，則可能是社區工作。',cue:'個人／家庭／個別化服務 → 個案工作'},
+ {name:'團體工作',keywords:['團體工作','團體動力','團體規範','團體凝聚力','團體歷程','成員互動','小組','團體領導','yAlom','亞隆'],core:'以團體互動與團體歷程作為工作媒介，關注規範、角色、凝聚力、領導與成員間的相互影響。',confuse:'看到「成員互動、團體規範、凝聚力」要與個案工作區分。',cue:'成員互動／規範／凝聚力 → 團體工作'},
+ {name:'社區工作／Rothman',keywords:['社區工作','rothman','羅斯曼','社區發展','社會計畫','社會行動','社區組織','社區參與'],core:'關注社區需求、資源、參與及集體行動；Rothman 常見三種模式為社區發展、社會計畫與社會行動。',confuse:'辨識模式時要看目標、決策方式、專業角色與權力衝突，而不是只看「社區」兩字。',cue:'社區發展／社會計畫／社會行動 → Rothman'},
+ {name:'Biestek 七大原則',keywords:['biestek','比斯台克','個別化','有目的的情感表達','感受的適當表達','接納','非評判的態度','案主自決','保密'],core:'個案工作關係中的經典專業原則，包括個別化、表達感受、有目的的情感表達、接納、非評判、自決與保密。',confuse:'題目常用情境描述考原則名稱，重點是辨識社工對案主的具體態度與關係處理。',cue:'自決／接納／非評判／保密／個別化 → Biestek'},
+ {name:'Erikson 心理社會發展',keywords:['erikson','艾瑞克森','心理社會發展','信任對不信任','自主對羞愧','勤奮對自卑','認同對角色混淆','親密對孤立','生產對停滯','統整對絕望'],core:'以生命週期的心理社會危機理解發展，各階段有主要發展任務與兩極衝突。',confuse:'考題常把年齡、階段與危機配對；不要只背階段名稱，要連同發展任務一起記。',cue:'發展階段／心理社會危機 → Erikson'},
+ {name:'Butler 生命回顧',keywords:['butler','巴特勒','生命回顧','life review','人生回顧','老年','統整','回顧生命'],core:'生命回顧是有意識地回顧與整理過往經驗，常用於老年工作與生命意義、統整等議題。',confuse:'「回憶」不一定就是正式生命回顧；要看是否具有整理生命經驗、意義建構等目的。',cue:'老年／生命回顧／生命意義 → Butler'},
+ {name:'生態系統觀點',keywords:['生態系統觀點','微視系統','中介系統','外部系統','鉅視系統','巨視系統','mesosystem','microsystem','exosystem','macrosystem'],core:'從多層次環境理解個人，常區分微視、中介、外部與鉅視系統，強調不同環境層次的交互影響。',confuse:'若題目在考不同環境層級的分類，優先想到生態系統理論的系統層次。',cue:'微視／中介／外部／鉅視 → 生態系統'},
+ {name:'邏輯模式／Logic Model',keywords:['logic model','邏輯模式','投入','活動','產出','成果','outcome','output','input'],core:'把方案的投入、活動、產出與成果連結起來，用來說明方案如何產生預期改變。',confuse:'「產出」通常是直接完成的服務或產品；「成果」是方案帶來的改變。',cue:'投入／活動／產出／成果 → Logic Model'},
+ {name:'問題樹',keywords:['問題樹','problem tree','核心問題','直接原因','間接原因','後果','原因與結果'],core:'將核心問題、原因與後果以樹狀結構整理，協助釐清問題形成的因果關係。',confuse:'原因在問題之下、後果在問題之上，是常見的圖像化辨識方式。',cue:'核心問題／原因／後果 → 問題樹'},
+ {name:'4Rs',keywords:['4rs','4r','rights','responsibility','relationships','risks','關係','責任','權利','風險'],core:'4Rs 是兒少保護與家庭工作中常見的分析架構；實際題目應依課程或題庫採用的四個 R 定義核對。',confuse:'4Rs 的中文翻譯可能依教材不同而有差異，遇到考題應以題幹提供的定義與正式教材為準。',cue:'兒少／家庭／權利／責任／關係／風險 → 4Rs'}
+];
+function conceptEvidence(q,con){
+  const question=String(q.question||'').toLowerCase();
+  const choices=(Array.isArray(q.choices)?q.choices:[]).map(x=>String(x||'').toLowerCase());
+  const explanation=String(q.explanation||'').toLowerCase();
+  const source=String(q.source_name||'').toLowerCase();
+  const terms=con.keywords.map(k=>String(k).toLowerCase());
+  const hit=(text)=>terms.reduce((n,k)=>n+(text.includes(k)?1:0),0);
+  const qHits=hit(question), cHits=choices.reduce((n,t)=>n+hit(t),0), eHits=hit(explanation), sHits=hit(source);
+  const official=officialAnswerFor(q);
+  const idx=official?official.charCodeAt(0)-65:null;
+  const correctChoice=idx!==null&&choices[idx]?choices[idx]:'';
+  const correctHits=hit(correctChoice);
+  const evidenceTypes=[qHits>0,cHits>0,eHits>0,correctHits>0].filter(Boolean).length;
+  // 不再「看到一個關鍵字就歸類」：題幹、選項、解析、正解選項分開計分，
+  // 並要求至少兩種獨立證據，或題幹／解析出現兩個以上概念線索。
+  const score=qHits*4+eHits*5+correctHits*4+cHits*1+sHits;
+  const strong=qHits>=2||eHits>=2||correctHits>=2;
+  const matched=(evidenceTypes>=2&&score>=6)||strong;
+  return {matched,score,evidenceTypes};
+}
+function conceptRows(rows){
+  return CONCEPTS.map(con=>{
+    const matched=rows.filter(x=>conceptEvidence(x.q,con).matched);
+    const unique=matched.length;
+    const wrong=matched.reduce((s,x)=>s+x.wrong,0);
+    if(!(unique>=2||wrong>=3))return null;
+    const active=matched.filter(x=>!x.resolved);
+    const resolvedCount=matched.filter(x=>x.resolved).length;
+    const resolved=matched.length>0&&active.length===0;
+    return {...con,matched,unique,wrong,activeCount:active.length,resolvedCount,resolved,last:Math.max(...matched.map(x=>x.last||0),0)};
+  }).filter(Boolean).sort((a,b)=>{
+    if(a.resolved!==b.resolved)return a.resolved?1:-1;
+    return (b.wrong-a.wrong)||(b.activeCount-a.activeCount)||(b.unique-a.unique)||(b.last-a.last);
+  });
+}
+function renderConcepts(rows){
+  const host=$('concepts');host.replaceChildren();
+  const list=conceptRows(rows);
+  if(!list.length){host.innerHTML='<div class="empty">目前還沒有足夠的重複錯題可以判定「常錯概念」。至少在同一概念下累積 2 題錯題，或同一概念的累計錯誤達 3 次後，這裡才會建立分析。</div>';return}
+  list.slice(0,12).forEach((c,i)=>{
+    const sec=document.createElement('section');sec.className='concept';
+    const h=document.createElement('h3');h.textContent=(i+1)+'．'+c.name;sec.append(h);
+    const meta=document.createElement('div');meta.className='muted';meta.textContent=c.resolved?'🟢 已導正｜歷史錯誤 '+c.wrong+' 次｜相關題目 '+c.unique+' 題｜最近連續答對 '+Math.max(...c.matched.map(x=>x.streak),0)+' 次':'🔴 需要複習｜相關錯題 '+c.unique+' 題｜累計答錯 '+c.wrong+' 次'+(c.resolvedCount? '｜已導正 '+c.resolvedCount+' 題':'');sec.append(meta);
+    const grid=document.createElement('div');grid.className='concept-grid';
+    [['核心概念',c.core],['容易混淆',c.confuse],['快速辨識',c.cue]].forEach(([label,val])=>{const b=document.createElement('div');b.className='concept-box';b.innerHTML='<div class="concept-label"></div><div></div>';b.querySelector('.concept-label').textContent=label;b.querySelector('div:last-child').textContent=val;grid.append(b)});
+    sec.append(grid);
+    const qs=document.createElement('details');qs.className='concept-q';
+    const sum=document.createElement('summary');sum.textContent='查看你的相關錯題（'+c.unique+' 題）';qs.append(sum);
+    const qlist=document.createElement('div');qlist.className='concept-q-list';
+    c.matched.sort((a,b)=>(b.wrong-a.wrong)||(b.last-a.last)).slice(0,10).forEach(x=>{const s=document.createElement('span');s.textContent=(paperKey(x.q)||'未知場次')+' #'+(qnum(x.q)??'—')+'（錯 '+x.wrong+'）';qlist.append(s)});
+    qs.append(qlist);sec.append(qs);
+    const note=document.createElement('div');note.className='concept-note';note.textContent='依題目、選項與既有解析的關鍵詞歸類；同一題可能同時屬於多個概念。';sec.append(note);
+    host.append(sec);
+  });
+}
+function render(){
+  const rows=buildRows();renderSummary(rows);renderConcepts(rows);populateSubjects(rows);
+  const subject=$('subjectFilter').value,sort=$('sort').value;
+  let list=rows.filter(x=>subject==='all'||x.q.subject===subject);
+  list.sort((a,b)=>sort==='recent'?b.last-a.last:(b.wrong-a.wrong)||(b.last-a.last));
+  const host=$('notes');host.replaceChildren();
+  if(!list.length){host.innerHTML='<div class="empty">目前沒有可整理的錯題複習筆記。先完成一些題目，這裡會依你的真實作答紀錄自動建立。</div>';return}
+  const groups=new Map();list.forEach(x=>{if(!groups.has(x.q.subject))groups.set(x.q.subject,[]);groups.get(x.q.subject).push(x)});
+  for(const [subject,items] of groups){
+    const sec=document.createElement('section');sec.className='subject';
+    const head=document.createElement('div');head.className='subject-head';
+    const h=document.createElement('h3');h.textContent=subject;
+    const badge=document.createElement('span');badge.className='badge';badge.textContent='實際錯題 '+items.length+' 題';
+    head.append(h,badge);sec.append(head);
+    items.forEach(x=>{
+      const q=x.q, item=document.createElement('article');item.className='item';
+      const ih=document.createElement('div');ih.className='item-head';
+      const tag=document.createElement('span');tag.className='badge '+(x.resolved?'normal':(x.wrong>=3?'':'normal'));tag.textContent=x.resolved?'🟢 已導正':(x.wrong>=3?'🔴 優先複習':'🟠 持續追蹤');
+      const meta=document.createElement('span');meta.className='muted';meta.textContent=(paperKey(q)||'未知場次')+'｜第 '+(qnum(q)??'—')+' 題｜歷史答錯 '+x.wrong+' 次'+(x.resolved?'｜最近連續答對 '+x.streak+' 次':'');
+      ih.append(tag,meta);item.append(ih);
+      const qt=document.createElement('p');qt.className='item-q';qt.textContent=q.question||'題目文字未提供';item.append(qt);
+      const officialText=x.official?x.official:(x.localAccepted.length?x.localAccepted.map(letter).join('、'):'未建立');
+      const al=document.createElement('div');al.className='answer-line';
+      al.innerHTML='<span class="correct">正確答案：'+officialText+'</span>　<span class="wrong">你的錯誤紀錄：'+x.wrong+' 次</span>';item.append(al);
+      if(q.explanation){
+        const ex=document.createElement('div');ex.className='explain';ex.textContent='解析：'+q.explanation;item.append(ex);
+      }else{
+        const ex=document.createElement('div');ex.className='explain';ex.textContent='目前題庫沒有這題的文字解析；本頁不自行補寫未核對的解析。';item.append(ex);
+      }
+      const src=document.createElement('div');src.className='source';
+      if(x.verified){
+        const r=sourceFor(q);
+        src.append(document.createTextNode('答案核對：'));
+        const strong=document.createElement('strong');strong.textContent='已核對';src.append(strong,document.createTextNode('｜官方來源：'));
+        const a=document.createElement('a');a.href=r.url;a.target='_blank';a.rel='noopener noreferrer';a.textContent='考選部標準答案';src.append(a);
+        if(x.officialIdx!==null&&!x.localAccepted.includes(x.officialIdx)){const warn=document.createElement('span');warn.className='wrong';warn.textContent='　⚠ 題庫答案與官方核對結果不同，請勿直接使用舊資料。';src.append(warn);}
+      }else src.textContent='答案核對：目前找不到這一題對應的官方核對紀錄。';
+      item.append(src);sec.append(item);
+    });
+    host.append(sec);
+  }
+}
+async function loadCloud(local){
+  if(!window.supabase?.createClient)return local;
+  try{
+    const client=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+    const {data:{session}}=await client.auth.getSession();
+    if(!session?.user)return local;
+    const {data,error}=await client.from('study_progress').select('stats,updated_at').eq('user_id',session.user.id).maybeSingle();
+    if(error||!data?.stats)return local;
+    $('dataStatus').textContent='已讀取：本機作答紀錄＋同一帳號雲端紀錄（已去除重複）。';
+    return mergeStats(local,data.stats);
+  }catch(_){return local}
+}
+async function boot(){
+  try{
+    const [br,vr]=await Promise.all([
+      fetch('./data/bank.json?v=20260924',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('bank.json '+r.status);return r.json()}),
+      fetch('./official_answer_verification.json?v=20260924',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('official_answer_verification.json '+r.status);return r.json()})
+    ]);
+    bank=Array.isArray(br)?br:(br.questions||[]);verification=vr||{};verification._map=officialMap();
+    stats=await loadCloud(loadLocal());records=Array.isArray(stats?.answers)?stats.answers:[];
+    $('dataStatus').textContent=records.length?'已讀取你的真實作答紀錄：'+records.length.toLocaleString()+' 筆。':'目前尚未找到作答紀錄。';
+    render();
+  }catch(e){
+    $('dataStatus').textContent='讀取失敗：'+e.message+'。請回主頁確認題庫與登入狀態。';
+    $('notes').innerHTML='<div class="empty">目前無法建立正式複習筆記。</div>';
+  }
+}
+$('subjectFilter').addEventListener('change',render);$('sort').addEventListener('change',render);boot();
+})();
+</script>
+</body></html>
