@@ -2,18 +2,185 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>個人快速複習筆記｜試行版</title>
+<title>我的快速複習筆記｜正式版</title>
 <style>
-:root{font-family:system-ui,-apple-system,"Noto Sans TC",sans-serif;color:#20242b;background:#f5f7fb}*{box-sizing:border-box}body{margin:0;padding:20px}.wrap{max-width:900px;margin:auto}.panel{background:#fff;border:1px solid #dfe4ec;border-radius:16px;padding:20px;margin:14px 0;box-shadow:0 2px 8px #17203308}h1{font-size:clamp(1.5rem,4vw,2rem);margin:0 0 8px}h2{font-size:1.2rem;margin:0 0 12px}.muted{color:#667085}.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}button,select{font:inherit;border:1px solid #cbd3df;border-radius:9px;padding:10px;background:#fff;cursor:pointer}button.primary{background:#245fc7;color:white;border-color:#245fc7}.notice{background:#fff7df;border:1px solid #f0d98a;padding:12px;border-radius:10px;line-height:1.6}.summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.metric{border:1px solid #e3e8ef;background:#fafbfc;border-radius:12px;padding:12px}.metric b{display:block;font-size:1.35rem}.theory{border:1px solid #e3e8ef;border-radius:13px;padding:16px;margin:12px 0}.theory h3{margin:0 0 8px}.tag{display:inline-block;border-radius:99px;background:#fff0ee;color:#a52822;padding:3px 9px;font-size:.85rem}.cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}.block{background:#f7f8fa;border-radius:10px;padding:12px;line-height:1.65}.block h4{margin:0 0 6px}.note{line-height:1.8}.foot{font-size:.88rem;color:#667085;margin-top:12px}@media(max-width:600px){body{padding:10px}.panel{padding:14px}.summary{grid-template-columns:1fr}.cols{grid-template-columns:1fr}}@media print{body{background:white;padding:0;color:#000}.wrap{max-width:none}.panel{box-shadow:none;border:0;padding:0;margin:0 0 16px}.no-print,.notice{display:none!important}.theory{break-inside:avoid;border:1px solid #aaa}.block{background:white;border:1px solid #ddd}.foot{color:#333}h1{font-size:20pt}}
+:root{font-family:system-ui,-apple-system,"Noto Sans TC",sans-serif;color:#20242b;background:#f5f7fb}
+*{box-sizing:border-box}body{margin:0;padding:20px}.wrap{max-width:980px;margin:auto}
+.panel{background:#fff;border:1px solid #dfe4ec;border-radius:16px;padding:20px;margin:14px 0;box-shadow:0 2px 8px #17203308}
+h1{font-size:clamp(1.5rem,4vw,2rem);margin:0 0 8px}h2{font-size:1.2rem;margin:0 0 12px}h3{margin:0 0 8px}
+.muted{color:#667085}.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+button,select{font:inherit;border:1px solid #cbd3df;border-radius:9px;padding:10px;background:#fff;cursor:pointer}
+button.primary{background:#245fc7;color:#fff;border-color:#245fc7}.notice{background:#eef6ff;border:1px solid #c8ddf7;padding:12px;border-radius:10px;line-height:1.65}
+.summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.metric{border:1px solid #e3e8ef;background:#fafbfc;border-radius:12px;padding:12px}.metric b{display:block;font-size:1.35rem;margin-top:4px}
+.subject{border:1px solid #e3e8ef;border-radius:14px;padding:16px;margin:12px 0}.subject-head{display:flex;justify-content:space-between;gap:12px;align-items:center}
+.badge{display:inline-block;border-radius:99px;background:#fff0ee;color:#a52822;padding:3px 9px;font-size:.84rem}.badge.normal{background:#eef2f7;color:#475467}
+.item{border:1px solid #e5e9ef;border-radius:12px;padding:14px;margin:10px 0;background:#fff}.item-head{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.item-q{font-weight:700;line-height:1.6;margin:8px 0}.answer-line{line-height:1.7}.wrong{color:#a52822;font-weight:700}.correct{color:#146c43;font-weight:700}
+.explain{background:#f7f8fa;border-radius:10px;padding:11px;line-height:1.7;margin-top:10px}.source{font-size:.86rem;margin-top:9px}.source a{color:#245fc7}
+.empty{text-align:center;padding:24px;border:1px dashed #cfd6e1;border-radius:12px;color:#667085}.loading{padding:18px;text-align:center;color:#667085}
+@media(max-width:700px){body{padding:10px}.panel{padding:14px}.summary{grid-template-columns:repeat(2,minmax(0,1fr))}.subject-head{align-items:flex-start;flex-direction:column}}
+@media print{body{background:#fff;padding:0}.wrap{max-width:none}.panel{box-shadow:none;border:0;padding:0;margin:0 0 16px}.no-print,.notice{display:none!important}.subject,.item{break-inside:avoid;border:1px solid #aaa}.explain{background:#fff;border:1px solid #ddd}}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body><main class="wrap">
-<header class="panel"><div class="row" style="justify-content:space-between"><div><h1>我的快速複習筆記</h1><p class="muted">從常錯題目整理出需要再釐清的理論</p></div><button class="primary no-print" onclick="window.print()">列印／另存 PDF</button></div><p class="notice"><strong>示範資料：</strong>目前不是讀取你的真實作答紀錄；以下理論與錯因僅用來展示網站整理方式，不是正式考試解析。正式版會依你的作答紀錄與可核對來源產生。</p></header>
-<section class="panel"><h2>這次抓到的複習重點</h2><div class="summary"><div class="metric"><span class="muted">示範常錯理論</span><b>3 個</b></div><div class="metric"><span class="muted">示範相關錯題</span><b>8 題</b></div><div class="metric"><span class="muted">建議複習時間</span><b>約 5 分鐘</b></div></div></section>
-<section class="panel"><div class="row no-print"><label for="filter">篩選筆記：</label><select id="filter"><option value="all">全部理論</option><option value="high">優先複習</option></select></div>
-<div id="notes">
-<article class="theory" data-priority="high"><div class="row"><span class="tag">優先複習</span><span class="muted">示範錯題 4 題</span></div><h3>理論示例 A｜系統觀點與生態觀點</h3><div class="cols"><div class="block"><h4>核心觀念</h4><p class="note">系統觀點著重系統內部及系統間的互動、界限與回饋；生態觀點則常以個人與環境的相互適應及交易作為理解焦點。</p></div><div class="block"><h4>容易混淆</h4><p class="note">兩者都會談到人與環境，不能只因題目出現「環境」就直接判定。要看題幹強調的是系統互動結構，還是個人—環境的適應關係。</p></div></div><div class="block" style="margin-top:12px"><h4>快速判斷</h4><p class="note">先圈出題幹的動詞與焦點：互動／界限／回饋 → 留意系統概念；適應／交易／環境壓力 → 留意生態概念。</p></div><p class="foot">來源狀態：示範內容，尚未對應正式教材或官方資料。正式版需附題目來源、答案依據及核對狀態。</p></article>
-<article class="theory" data-priority="high"><div class="row"><span class="tag">優先複習</span><span class="muted">示範錯題 3 題</span></div><h3>理論示例 B｜危機介入與問題解決</h3><div class="cols"><div class="block"><h4>核心觀念</h4><p class="note">危機介入通常聚焦當下危機、情緒與功能恢復，處遇時間較具急迫性；問題解決取向則以界定問題、形成目標、發展方案及評估結果為主要工作脈絡。</p></div><div class="block"><h4>容易混淆</h4><p class="note">兩者都可能有目標與行動步驟。辨識關鍵不是「有沒有解決問題」，而是題目是否突出危機造成的失衡與即時穩定需求。</p></div></div><div class="block" style="margin-top:12px"><h4>快速判斷</h4><p class="note">若題幹強調突發事件、失衡、立即安全或恢復原有功能，優先檢視危機介入；若強調問題界定與方案選擇，檢視問題解決取向。</p></div><p class="foot">來源狀態：示範內容，尚未對應正式教材或官方資料。正式版需附題目來源、答案依據及核對狀態。</p></article>
-<article class="theory" data-priority="normal"><div class="row"><span class="tag" style="background:#eef2f7;color:#475467">持續追蹤</span><span class="muted">示範錯題 1 題</span></div><h3>理論示例 C｜增強與懲罰</h3><div class="cols"><div class="block"><h4>核心觀念</h4><p class="note">增強的判準是行為之後，該行為未來發生頻率增加；懲罰的判準是行為未來發生頻率降低。「正／負」描述刺激的加入或移除，不代表好壞。</p></div><div class="block"><h4>容易混淆</h4><p class="note">不要把「負增強」誤當成懲罰。先看行為後果使行為增加還是減少，再看刺激是加入還是移除。</p></div></div><div class="block" style="margin-top:12px"><h4>快速判斷</h4><p class="note">第一問：行為增加還是減少？第二問：刺激加入還是移除？依序判斷，避免只憑「正／負」猜答案。</p></div><p class="foot">來源狀態：示範內容，尚未對應正式教材或官方資料。正式版需附題目來源、答案依據及核對狀態。</p></article>
-</div></section><p class="foot">試行版｜示範資料僅呈現版面與整理邏輯。列印時會隱藏篩選與列印按鈕，保留筆記內容。</p>
-</main><script>const filter=document.getElementById('filter');filter.addEventListener('change',()=>document.querySelectorAll('.theory').forEach(card=>{card.hidden=filter.value==='high'&&card.dataset.priority!=='high'}));</script></body></html>
+<header class="panel">
+  <div class="row" style="justify-content:space-between">
+    <div><h1>我的快速複習筆記</h1><p class="muted">只從你的實際作答紀錄整理；正式答案以可核對的考選部資料為準。</p></div>
+    <button class="primary no-print" onclick="window.print()">列印／另存 PDF</button>
+  </div>
+  <p class="notice"><strong>資料規則：</strong>本頁不再使用示範題。先讀取目前瀏覽器的真實作答紀錄；若已登入，再讀取同一帳號的雲端作答紀錄。複習題目來自目前題庫，正確答案會再以「官方答案核對報告」確認；官方來源連結直接指向考選部。</p>
+</header>
+
+<section class="panel"><h2>這次抓到的複習重點</h2><div id="summary" class="summary"></div><p id="dataStatus" class="muted">正在讀取你的作答紀錄……</p></section>
+<section class="panel no-print"><div class="row"><label>篩選科目 <select id="subjectFilter"><option value="all">全部科目</option></select></label><label>排序 <select id="sort"><option value="wrong">最常答錯</option><option value="recent">最近答錯</option></select></label></div></section>
+<section class="panel"><div id="notes" class="loading">正在整理……</div></section>
+<p class="muted">正式版｜只呈現已有作答紀錄的題目；沒有作答紀錄就不自行製造「弱點」。官方答案核對狀態與來源會標示在每題下方。</p>
+</main>
+<script>
+(()=>{'use strict';
+const SUPABASE_URL='https://cnlaurnbzlwcrcqsomfu.supabase.co';
+const SUPABASE_KEY='sb_publishable_uffszUPEIM658pLMPnklpg_byZX0J8n';
+const STATS_KEY='sw_quiz_stats_v1';
+const $=id=>document.getElementById(id);
+const letter=n=>Number.isFinite(Number(n))?String.fromCharCode(65+Number(n)):'—';
+const parse=s=>{try{return JSON.parse(s)||null}catch(_){return null}};
+const paperKey=q=>q&&q.session?String(q.year)+'-'+String(q.session):String(q?.year||'');
+const qnum=q=>{for(const k of ['questionNumber','question_number','number','no','num','qno']){const n=Number(q?.[k]);if(Number.isFinite(n))return n}return null};
+const accepted=q=>Array.isArray(q?.accepted_answers)&&q.accepted_answers.length?q.accepted_answers:[q?.answer];
+let bank=[],verification={},records=[],stats=null;
+
+function loadLocal(){const raw=parse(localStorage.getItem(STATS_KEY)||'{}')||{};return raw}
+function dedupeAnswers(list){
+  const seen=new Set();
+  return (Array.isArray(list)?list:[]).filter(a=>{
+    const k=[a.id,a.date,a.chosen,a.source].join('|');
+    if(seen.has(k))return false;seen.add(k);return true;
+  });
+}
+function mergeStats(local,cloud){
+  if(!cloud)return local||{};
+  const a=dedupeAnswers([...(local?.answers||[]),...(cloud?.answers||[])]);
+  const wrongCounts={...(local?.wrongCounts||{})};
+  Object.entries(cloud?.wrongCounts||{}).forEach(([k,v])=>wrongCounts[k]=Math.max(Number(wrongCounts[k])||0,Number(v)||0));
+  return {...local,...cloud,answers:a,wrongCounts};
+}
+function officialMap(){
+  const m=new Map();
+  for(const p of verification.papers||[])for(const s of p.subjects||[]){
+    m.set(p.paper+'|'+s.subject,{...s,paper:p.paper});
+  }
+  return m;
+}
+function sourceFor(q){
+  const r=verification._map?.get(paperKey(q)+'|'+(q.subject||''));
+  return r||null;
+}
+function officialAnswerFor(q){
+  const r=sourceFor(q),n=qnum(q);
+  if(!r||!n||!r.official||n>r.official.length)return null;
+  return r.official[n-1];
+}
+function buildRows(){
+  const byId=new Map(bank.map(q=>[String(q.id),q]));
+  const wrongById={};
+  records.forEach(a=>{
+    if(a.chosen==null||a.chosen==='')return;
+    if(!a.correct)wrongById[String(a.id)]=(wrongById[String(a.id)]||0)+1;
+  });
+  Object.entries(stats?.wrongCounts||{}).forEach(([id,n])=>wrongById[id]=Math.max(wrongById[id]||0,Number(n)||0));
+  const lastById={};
+  records.forEach(a=>{if(!a.correct)lastById[String(a.id)]=Math.max(lastById[String(a.id)]||0,Number(a.date)||0)});
+  return Object.entries(wrongById).map(([id,wrong])=>{
+    const q=byId.get(id);if(!q||wrong<1)return null;
+    const official=officialAnswerFor(q);
+    const localAccepted=accepted(q).map(Number);
+    const officialIdx=official?official.charCodeAt(0)-65:null;
+    return {q,wrong,last:lastById[id]||0,official,officialIdx,localAccepted,verified:!!sourceFor(q)};
+  }).filter(Boolean);
+}
+function renderSummary(rows){
+  const subjects=[...new Set(rows.map(x=>x.q.subject).filter(Boolean))];
+  const repeated=rows.filter(x=>x.wrong>=3).length;
+  const verified=rows.filter(x=>x.verified).length;
+  $('summary').innerHTML='';
+  [['有錯誤紀錄的題目',rows.length],['累計答錯 ≥3 次',repeated],['涵蓋科目',subjects.length],['官方答案可核對',verified]].forEach(([a,b])=>{
+    const d=document.createElement('div');d.className='metric';d.innerHTML='<span class="muted"></span><b></b>';d.querySelector('span').textContent=a;d.querySelector('b').textContent=b; $('summary').append(d);
+  });
+}
+function populateSubjects(rows){
+  const sel=$('subjectFilter'),keep=sel.value;
+  [...new Set(rows.map(x=>x.q.subject).filter(Boolean))].sort().forEach(s=>{const o=document.createElement('option');o.value=s;o.textContent=s;sel.append(o)});
+  if([...sel.options].some(o=>o.value===keep))sel.value=keep;
+}
+function render(){
+  const rows=buildRows();renderSummary(rows);populateSubjects(rows);
+  const subject=$('subjectFilter').value,sort=$('sort').value;
+  let list=rows.filter(x=>subject==='all'||x.q.subject===subject);
+  list.sort((a,b)=>sort==='recent'?b.last-a.last:(b.wrong-a.wrong)||(b.last-a.last));
+  const host=$('notes');host.replaceChildren();
+  if(!list.length){host.innerHTML='<div class="empty">目前沒有可整理的錯題複習筆記。先完成一些題目，這裡會依你的真實作答紀錄自動建立。</div>';return}
+  const groups=new Map();list.forEach(x=>{if(!groups.has(x.q.subject))groups.set(x.q.subject,[]);groups.get(x.q.subject).push(x)});
+  for(const [subject,items] of groups){
+    const sec=document.createElement('section');sec.className='subject';
+    const head=document.createElement('div');head.className='subject-head';
+    const h=document.createElement('h3');h.textContent=subject;
+    const badge=document.createElement('span');badge.className='badge';badge.textContent='實際錯題 '+items.length+' 題';
+    head.append(h,badge);sec.append(head);
+    items.forEach(x=>{
+      const q=x.q, item=document.createElement('article');item.className='item';
+      const ih=document.createElement('div');ih.className='item-head';
+      const tag=document.createElement('span');tag.className='badge '+(x.wrong>=3?'':'normal');tag.textContent=x.wrong>=3?'優先複習':'持續追蹤';
+      const meta=document.createElement('span');meta.className='muted';meta.textContent=(paperKey(q)||'未知場次')+'｜第 '+(qnum(q)??'—')+' 題｜累計答錯 '+x.wrong+' 次';
+      ih.append(tag,meta);item.append(ih);
+      const qt=document.createElement('p');qt.className='item-q';qt.textContent=q.question||'題目文字未提供';item.append(qt);
+      const officialText=x.official?x.official:(x.localAccepted.length?x.localAccepted.map(letter).join('、'):'未建立');
+      const al=document.createElement('div');al.className='answer-line';
+      al.innerHTML='<span class="correct">正確答案：'+officialText+'</span>　<span class="wrong">你的錯誤紀錄：'+x.wrong+' 次</span>';item.append(al);
+      if(q.explanation){
+        const ex=document.createElement('div');ex.className='explain';ex.textContent='解析：'+q.explanation;item.append(ex);
+      }else{
+        const ex=document.createElement('div');ex.className='explain';ex.textContent='目前題庫沒有這題的文字解析；本頁不自行補寫未核對的解析。';item.append(ex);
+      }
+      const src=document.createElement('div');src.className='source';
+      if(x.verified){
+        const r=sourceFor(q);src.innerHTML='答案核對：<strong>已核對</strong>｜官方來源：';
+        const a=document.createElement('a');a.href=r.url;a.target='_blank';a.rel='noopener noreferrer';a.textContent='考選部標準答案';src.append(a);
+        if(x.officialIdx!==null&&!x.localAccepted.includes(x.officialIdx))src.innerHTML+=' <span class="wrong">⚠ 題庫答案與官方核對結果不同，請勿直接使用舊資料。</span>';
+      }else src.textContent='答案核對：目前找不到這一題對應的官方核對紀錄。';
+      item.append(src);sec.append(item);
+    });
+    host.append(sec);
+  }
+}
+async function loadCloud(local){
+  if(!window.supabase?.createClient)return local;
+  try{
+    const client=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+    const {data:{session}}=await client.auth.getSession();
+    if(!session?.user)return local;
+    const {data,error}=await client.from('study_progress').select('stats,updated_at').eq('user_id',session.user.id).maybeSingle();
+    if(error||!data?.stats)return local;
+    $('dataStatus').textContent='已讀取：本機作答紀錄＋同一帳號雲端紀錄（已去除重複）。';
+    return mergeStats(local,data.stats);
+  }catch(_){return local}
+}
+async function boot(){
+  try{
+    const [br,vr]=await Promise.all([
+      fetch('./bank.json?v=20260924',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('bank.json '+r.status);return r.json()}),
+      fetch('./official_answer_verification.json?v=20260924',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('official_answer_verification.json '+r.status);return r.json()})
+    ]);
+    bank=Array.isArray(br)?br:(br.questions||[]);verification=vr||{};verification._map=officialMap();
+    stats=await loadCloud(loadLocal());records=Array.isArray(stats?.answers)?stats.answers:[];
+    $('dataStatus').textContent=records.length?'已讀取你的真實作答紀錄：'+records.length.toLocaleString()+' 筆。':'目前尚未找到作答紀錄。';
+    render();
+  }catch(e){
+    $('dataStatus').textContent='讀取失敗：'+e.message+'。請回主頁確認題庫與登入狀態。';
+    $('notes').innerHTML='<div class="empty">目前無法建立正式複習筆記。</div>';
+  }
+}
+$('subjectFilter').addEventListener('change',render);$('sort').addEventListener('change',render);boot();
+})();
+</script>
+</body></html>
