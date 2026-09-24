@@ -36,7 +36,7 @@ button.primary{background:#245fc7;color:#fff;border-color:#245fc7}.notice{backgr
 <section class="panel"><h2>你的常錯關鍵概念／理論</h2><p class="muted">依你的實際錯題、題目文字與既有解析歸納；這是個人化學習分析，不是考選部官方分類。系統只在有足夠錯題證據時建立概念。</p><div id="concepts" class="loading">正在分析……</div></section>
 <section class="panel no-print"><div class="row"><label>篩選科目 <select id="subjectFilter"><option value="all">全部科目</option></select></label><label>排序 <select id="sort"><option value="wrong">最常答錯</option><option value="recent">最近答錯</option></select></label></div></section>
 <section class="panel"><div id="notes" class="loading">正在整理……</div></section>
-<p class="muted">正式版｜只呈現已有作答紀錄的題目；沒有作答紀錄就不自行製造「弱點」。官方答案核對狀態與來源會標示在每題下方。</p>
+<p class="muted">正式版｜保留歷史錯誤，但會依最近作答自動區分「需要複習」與「已導正」；連續答對 3 次視為已導正，不刪除歷史紀錄。官方答案核對狀態與來源會標示在每題下方。</p>
 </main>
 <script>
 (()=>{'use strict';
@@ -82,6 +82,15 @@ function officialAnswerFor(q){
   if(!r||!n||!r.official||n>r.official.length)return null;
   return r.official[n-1];
 }
+function answerProgress(id){
+  const arr=records.filter(a=>String(a.id)===String(id)&&a.chosen!=null&&a.chosen!=='').sort((a,b)=>(Number(a.date)||0)-(Number(b.date)||0));
+  let streak=0;
+  for(let i=arr.length-1;i>=0;i--){
+    if(arr[i].correct)streak++; else break;
+  }
+  const last=arr[arr.length-1]||null;
+  return {streak,lastDate:Number(last?.date)||0,lastCorrect:!!last?.correct};
+}
 function buildRows(){
   const byId=new Map(bank.map(q=>[String(q.id),q]));
   const wrongById={};
@@ -94,18 +103,21 @@ function buildRows(){
   records.forEach(a=>{if(!a.correct)lastById[String(a.id)]=Math.max(lastById[String(a.id)]||0,Number(a.date)||0)});
   return Object.entries(wrongById).map(([id,wrong])=>{
     const q=byId.get(id);if(!q||wrong<1)return null;
+    const progress=answerProgress(id);
+    const resolved=progress.lastCorrect&&progress.streak>=3;
     const official=officialAnswerFor(q);
     const localAccepted=accepted(q).map(Number);
     const officialIdx=official?official.charCodeAt(0)-65:null;
-    return {q,wrong,last:lastById[id]||0,official,officialIdx,localAccepted,verified:!!sourceFor(q)};
+    return {q,wrong,last:lastById[id]||0,official,officialIdx,localAccepted,verified:!!sourceFor(q),...progress,resolved};
   }).filter(Boolean);
 }
 function renderSummary(rows){
   const subjects=[...new Set(rows.map(x=>x.q.subject).filter(Boolean))];
-  const repeated=rows.filter(x=>x.wrong>=3).length;
+  const repeated=rows.filter(x=>x.wrong>=3&&!x.resolved).length;
+  const resolved=rows.filter(x=>x.resolved).length;
   const verified=rows.filter(x=>x.verified).length;
   $('summary').innerHTML='';
-  [['有錯誤紀錄的題目',rows.length],['累計答錯 ≥3 次',repeated],['涵蓋科目',subjects.length],['官方答案可核對',verified]].forEach(([a,b])=>{
+  [['目前需要複習',rows.filter(x=>!x.resolved).length],['反覆錯誤 ≥3 次',repeated],['已導正',resolved],['官方答案可核對',verified]].forEach(([a,b])=>{
     const d=document.createElement('div');d.className='metric';d.innerHTML='<span class="muted"></span><b></b>';d.querySelector('span').textContent=a;d.querySelector('b').textContent=b; $('summary').append(d);
   });
 }
@@ -141,8 +153,14 @@ function conceptRows(rows){
     const unique=matched.length;
     const wrong=matched.reduce((s,x)=>s+x.wrong,0);
     if(!(unique>=2||wrong>=3))return null;
-    return {...con,matched,unique,wrong,last:Math.max(...matched.map(x=>x.last||0),0)};
-  }).filter(Boolean).sort((a,b)=>(b.wrong-a.wrong)||(b.unique-a.unique)||(b.last-a.last));
+    const active=matched.filter(x=>!x.resolved);
+    const resolvedCount=matched.filter(x=>x.resolved).length;
+    const resolved=matched.length>0&&active.length===0;
+    return {...con,matched,unique,wrong,activeCount:active.length,resolvedCount,resolved,last:Math.max(...matched.map(x=>x.last||0),0)};
+  }).filter(Boolean).sort((a,b)=>{
+    if(a.resolved!==b.resolved)return a.resolved?1:-1;
+    return (b.wrong-a.wrong)||(b.activeCount-a.activeCount)||(b.unique-a.unique)||(b.last-a.last);
+  });
 }
 function renderConcepts(rows){
   const host=$('concepts');host.replaceChildren();
@@ -151,7 +169,7 @@ function renderConcepts(rows){
   list.slice(0,12).forEach((c,i)=>{
     const sec=document.createElement('section');sec.className='concept';
     const h=document.createElement('h3');h.textContent=(i+1)+'．'+c.name;sec.append(h);
-    const meta=document.createElement('div');meta.className='muted';meta.textContent='相關錯題 '+c.unique+' 題｜累計答錯 '+c.wrong+' 次'+(c.matched.some(x=>x.wrong>=3)?'｜含反覆錯誤題':'');sec.append(meta);
+    const meta=document.createElement('div');meta.className='muted';meta.textContent=c.resolved?'🟢 已導正｜歷史錯誤 '+c.wrong+' 次｜相關題目 '+c.unique+' 題｜最近連續答對 '+Math.max(...c.matched.map(x=>x.streak),0)+' 次':'🔴 需要複習｜相關錯題 '+c.unique+' 題｜累計答錯 '+c.wrong+' 次'+(c.resolvedCount? '｜已導正 '+c.resolvedCount+' 題':'');sec.append(meta);
     const grid=document.createElement('div');grid.className='concept-grid';
     [['核心概念',c.core],['容易混淆',c.confuse],['快速辨識',c.cue]].forEach(([label,val])=>{const b=document.createElement('div');b.className='concept-box';b.innerHTML='<div class="concept-label"></div><div></div>';b.querySelector('.concept-label').textContent=label;b.querySelector('div:last-child').textContent=val;grid.append(b)});
     sec.append(grid);
@@ -181,8 +199,8 @@ function render(){
     items.forEach(x=>{
       const q=x.q, item=document.createElement('article');item.className='item';
       const ih=document.createElement('div');ih.className='item-head';
-      const tag=document.createElement('span');tag.className='badge '+(x.wrong>=3?'':'normal');tag.textContent=x.wrong>=3?'優先複習':'持續追蹤';
-      const meta=document.createElement('span');meta.className='muted';meta.textContent=(paperKey(q)||'未知場次')+'｜第 '+(qnum(q)??'—')+' 題｜累計答錯 '+x.wrong+' 次';
+      const tag=document.createElement('span');tag.className='badge '+(x.resolved?'normal':(x.wrong>=3?'':'normal'));tag.textContent=x.resolved?'🟢 已導正':(x.wrong>=3?'🔴 優先複習':'🟠 持續追蹤');
+      const meta=document.createElement('span');meta.className='muted';meta.textContent=(paperKey(q)||'未知場次')+'｜第 '+(qnum(q)??'—')+' 題｜歷史答錯 '+x.wrong+' 次'+(x.resolved?'｜最近連續答對 '+x.streak+' 次':'');
       ih.append(tag,meta);item.append(ih);
       const qt=document.createElement('p');qt.className='item-q';qt.textContent=q.question||'題目文字未提供';item.append(qt);
       const officialText=x.official?x.official:(x.localAccepted.length?x.localAccepted.map(letter).join('、'):'未建立');
