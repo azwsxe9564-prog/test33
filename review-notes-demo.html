@@ -170,7 +170,7 @@ async function loadCloud(local){
 async function boot(){
   try{
     const [br,vr]=await Promise.all([
-      fetch('./bank.json?v=20260924',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('bank.json '+r.status);return r.json()}),
+      fetch('./data/bank.json?v=20260924',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('bank.json '+r.status);return r.json()}),
       fetch('./official_answer_verification.json?v=20260924',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('official_answer_verification.json '+r.status);return r.json()})
     ]);
     bank=Array.isArray(br)?br:(br.questions||[]);verification=vr||{};verification._map=officialMap();
