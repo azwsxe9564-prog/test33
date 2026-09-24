@@ -143,13 +143,29 @@ const CONCEPTS=[
  {name:'問題樹',keywords:['問題樹','problem tree','核心問題','直接原因','間接原因','後果','原因與結果'],core:'將核心問題、原因與後果以樹狀結構整理，協助釐清問題形成的因果關係。',confuse:'原因在問題之下、後果在問題之上，是常見的圖像化辨識方式。',cue:'核心問題／原因／後果 → 問題樹'},
  {name:'4Rs',keywords:['4rs','4r','rights','responsibility','relationships','risks','關係','責任','權利','風險'],core:'4Rs 是兒少保護與家庭工作中常見的分析架構；實際題目應依課程或題庫採用的四個 R 定義核對。',confuse:'4Rs 的中文翻譯可能依教材不同而有差異，遇到考題應以題幹提供的定義與正式教材為準。',cue:'兒少／家庭／權利／責任／關係／風險 → 4Rs'}
 ];
-function textOf(q){return [q.question,...(Array.isArray(q.choices)?q.choices:[]),q.explanation,q.source_name].filter(Boolean).join(' ').toLowerCase();}
+function conceptEvidence(q,con){
+  const question=String(q.question||'').toLowerCase();
+  const choices=(Array.isArray(q.choices)?q.choices:[]).map(x=>String(x||'').toLowerCase());
+  const explanation=String(q.explanation||'').toLowerCase();
+  const source=String(q.source_name||'').toLowerCase();
+  const terms=con.keywords.map(k=>String(k).toLowerCase());
+  const hit=(text)=>terms.reduce((n,k)=>n+(text.includes(k)?1:0),0);
+  const qHits=hit(question), cHits=choices.reduce((n,t)=>n+hit(t),0), eHits=hit(explanation), sHits=hit(source);
+  const official=officialAnswerFor(q);
+  const idx=official?official.charCodeAt(0)-65:null;
+  const correctChoice=idx!==null&&choices[idx]?choices[idx]:'';
+  const correctHits=hit(correctChoice);
+  const evidenceTypes=[qHits>0,cHits>0,eHits>0,correctHits>0].filter(Boolean).length;
+  // 不再「看到一個關鍵字就歸類」：題幹、選項、解析、正解選項分開計分，
+  // 並要求至少兩種獨立證據，或題幹／解析出現兩個以上概念線索。
+  const score=qHits*4+eHits*5+correctHits*4+cHits*1+sHits;
+  const strong=qHits>=2||eHits>=2||correctHits>=2;
+  const matched=(evidenceTypes>=2&&score>=6)||strong;
+  return {matched,score,evidenceTypes};
+}
 function conceptRows(rows){
   return CONCEPTS.map(con=>{
-    const matched=rows.filter(x=>{
-      const t=textOf(x.q);
-      return con.keywords.some(k=>t.includes(String(k).toLowerCase()));
-    });
+    const matched=rows.filter(x=>conceptEvidence(x.q,con).matched);
     const unique=matched.length;
     const wrong=matched.reduce((s,x)=>s+x.wrong,0);
     if(!(unique>=2||wrong>=3))return null;
